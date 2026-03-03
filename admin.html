@@ -1,33 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- ═══════════════════════════════════════════════════════════
-     NAMU SPACES — Admin Panel  (NOT publicly linked)
-     Access: admin@namuspaces / password123
-     ═══════════════════════════════════════════════════════════ -->
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Namu Spaces — Admin</title>
-<meta name="robots" content="noindex, nofollow"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  /* Kenyan Design System — matching index.html */
-  --tc:#7D5D4B;--tc-l:#9B7260;--tc-warm:#A68A64;--tc-deep:#4A3C31;
-  --aberdare:#5B8C5A;--forest:#3A5A40;
-  --maasai:#87CEEB;--twilight:#2C3E50;
+  --tc:#7D5D4B;--tc-l:#9B7260;--tc-warm:#A68A64;--tc-deep:#4A3C31;--tc-d:#6a4f40;
+  --aberdare:#5B8C5A;--forest:#3A5A40;--twilight:#2C3E50;
   --gold:#F9A825;--spice:#E25822;
-  --sand:#E8DCC8;--sand-d:#CFC0A5;
-  --cream:#F8F4EE;--cream-warm:#EFE8DA;--parchment:#FAF6F0;
-  --dark:#2E2118;--text:#2E2118;--muted:#7A6A5A;
-  --white:#FFFFFF;--danger:#c0392b;--success:#27ae60;
-  /* Aliases for existing admin UI */
+  --sand:#E8DCC8;--sand-d:#CFC0A5;--cream:#F8F4EE;--cream-warm:#EFE8DA;--parchment:#FAF6F0;
+  --dark:#2E2118;--text:#2E2118;--muted:#7A6A5A;--white:#FFFFFF;
+  --danger:#c0392b;--success:#27ae60;
   --indigo:var(--tc-deep);--indigo-l:#5A4A3A;--olive:var(--aberdare);
-  --sidebar-w:260px;
-  --ease:cubic-bezier(0.4,0,0.2,1);
+  --sidebar-w:260px;--ease:cubic-bezier(0.4,0,0.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:'Montserrat',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -37,13 +28,11 @@ button{cursor:pointer;border:none;font-family:inherit}
 input,textarea,select{font-family:inherit}
 ul{list-style:none}
 img{display:block;max-width:100%}
-
-/* LOGIN PAGE */
+/* LOGIN */
 #login-page{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--tc-deep);background-image:radial-gradient(circle at 30% 40%,rgba(125,93,75,.18) 0%,transparent 60%),radial-gradient(circle at 70% 60%,rgba(91,140,90,.12) 0%,transparent 60%)}
 #login-page.hidden{display:none}
 .login-card{background:rgba(255,255,255,.04);border:1px solid rgba(232,220,200,.1);border-radius:8px;padding:3rem 2.5rem;width:100%;max-width:400px;backdrop-filter:blur(12px)}
-.login-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--sand);letter-spacing:.05em;margin-bottom:.25rem}
-.login-logo span{color:var(--tc-l)}
+.login-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--sand);letter-spacing:.05em;margin-bottom:.25rem} .login-logo span{color:var(--tc-l)}
 .login-subtitle{font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,220,200,.4);margin-bottom:2.5rem}
 .l-field{margin-bottom:1.25rem}
 .l-field label{display:block;font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,220,200,.6);margin-bottom:.4rem}
@@ -55,16 +44,13 @@ img{display:block;max-width:100%}
 .login-err{display:none;margin-top:.75rem;color:#e74c3c;font-size:.82rem;text-align:center}
 .login-err.show{display:block}
 .login-hint{margin-top:1.5rem;text-align:center;font-size:.72rem;color:rgba(232,220,200,.25)}
-
-/* APP LAYOUT */
+/* APP */
 #app{display:none;height:100vh;overflow:hidden}
 #app.visible{display:flex}
-
-/* Sidebar */
+/* SIDEBAR */
 #sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--tc-deep);display:flex;flex-direction:column;overflow:hidden;transition:width .3s var(--ease)}
 .sb-head{padding:1.5rem 1.25rem;border-bottom:1px solid rgba(232,220,200,.06)}
-.sb-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--sand);letter-spacing:.05em}
-.sb-logo span{color:var(--tc-l)}
+.sb-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--sand);letter-spacing:.05em} .sb-logo span{color:var(--tc-l)}
 .sb-sub{font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,220,200,.3);margin-top:.15rem}
 .sb-nav{flex:1;overflow-y:auto;padding:.75rem 0}
 .sb-nav::-webkit-scrollbar{width:4px}
@@ -77,69 +63,59 @@ img{display:block;max-width:100%}
 .sb-foot{padding:1rem 1.25rem;border-top:1px solid rgba(232,220,200,.06)}
 .logout-btn{display:flex;align-items:center;gap:.65rem;width:100%;padding:.65rem 1rem;background:rgba(192,57,43,.15);color:rgba(232,220,200,.6);border-radius:3px;font-size:.78rem;font-weight:500;border:1px solid rgba(192,57,43,.2);transition:all .2s}
 .logout-btn:hover{background:rgba(192,57,43,.3);color:var(--sand)}
-
-/* Main */
+/* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--parchment)}
-
-/* Top bar */
 #topbar{height:60px;background:var(--white);border-bottom:1px solid var(--sand);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;flex-shrink:0;box-shadow:0 1px 8px rgba(45,58,94,.06)}
-.topbar-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--indigo)}
+.topbar-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;color:var(--indigo)}
 .topbar-right{display:flex;align-items:center;gap:1rem}
 .view-site{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1rem;background:var(--indigo);color:#fff;border-radius:2px;transition:background .2s}
 .view-site:hover{background:var(--indigo-l)}
-
-/* Content area */
+.sync-badge{font-size:.7rem;font-weight:600;padding:.3rem .75rem;border-radius:2px;display:flex;align-items:center;gap:.35rem}
+.sync-badge.live{background:rgba(39,174,96,.12);color:var(--success);border:1px solid rgba(39,174,96,.25)}
+.sync-badge.saving{background:rgba(249,168,37,.12);color:#c87800;border:1px solid rgba(249,168,37,.3)}
+.sync-badge.error{background:rgba(192,57,43,.1);color:var(--danger);border:1px solid rgba(192,57,43,.2)}
+/* CONTENT */
 #content{flex:1;overflow-y:auto;padding:2rem}
 #content::-webkit-scrollbar{width:6px}
 #content::-webkit-scrollbar-thumb{background:var(--sand-d);border-radius:3px}
-
-/* PANELS */
 .panel{display:none;animation:panelIn .25s ease}
 .panel.active{display:block}
 @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* Dashboard Stats */
+/* DASHBOARD */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.25rem;margin-bottom:2.5rem}
 .stat-card{background:var(--white);border-radius:6px;padding:1.5rem;border:1px solid var(--sand);position:relative;overflow:hidden}
 .stat-card::after{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--tc);border-radius:0 6px 6px 0}
-.stat-icon{font-size:1.5rem;color:var(--tc);margin-bottom:.75rem;opacity:.7}.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--indigo);line-height:1}
+.stat-icon{font-size:1.5rem;color:var(--tc);margin-bottom:.75rem;opacity:.7}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:600;color:var(--indigo);line-height:1}
 .stat-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.25rem}
 .dash-section{background:var(--white);border-radius:6px;padding:1.5rem;border:1px solid var(--sand);margin-bottom:1.5rem}
 .dash-section h3{font-size:1.2rem;font-weight:400;color:var(--indigo);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--sand)}
 .dash-list{display:flex;flex-direction:column;gap:.6rem}
 .dash-item{display:flex;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--muted);padding:.4rem 0;border-bottom:1px solid var(--cream)}
 .dash-item:last-child{border-bottom:none}
-.dash-badge{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;background:rgba(193,97,58,.1);color:var(--tc)}
-
-/* Section header */
+.dash-badge{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;background:rgba(125,93,75,.1);color:var(--tc)}
+/* SECTION BAR */
 .section-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
 .section-bar h2{font-size:1.6rem;font-weight:400;color:var(--indigo)}
 .add-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.25rem;background:var(--tc);color:#fff;border-radius:3px;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:background .2s;border:none}
 .add-btn:hover{background:var(--tc-d)}
-
-/* Cards grid */
+/* CARDS */
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
 .item-card{background:var(--white);border-radius:6px;border:1px solid var(--sand);overflow:hidden;transition:box-shadow .2s}
 .item-card:hover{box-shadow:0 6px 24px rgba(45,58,94,.1)}
 .item-card-img{width:100%;height:180px;object-fit:cover;background:var(--sand)}
 .team-card-img{height:220px;object-position:top}
 .item-card-body{padding:1.1rem 1.25rem 1.25rem}
-.item-card-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--indigo);margin-bottom:.25rem}
+.item-card-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--indigo);margin-bottom:.25rem}
 .item-card-sub{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tc);margin-bottom:.5rem}
 .item-card-desc{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:1rem}
 .item-card-actions{display:flex;gap:.6rem}
 .act-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .85rem;border-radius:2px;font-size:.7rem;font-weight:600;letter-spacing:.08em;border:1px solid;transition:all .18s}
-.edit-act{border-color:var(--indigo);color:var(--indigo)}
-.edit-act:hover{background:var(--indigo);color:#fff}
-.del-act{border-color:var(--danger);color:var(--danger)}
-.del-act:hover{background:var(--danger);color:#fff}
-
-/* Empty state */
+.edit-act{border-color:var(--indigo);color:var(--indigo)} .edit-act:hover{background:var(--indigo);color:#fff}
+.del-act{border-color:var(--danger);color:var(--danger)} .del-act:hover{background:var(--danger);color:#fff}
 .empty-state{text-align:center;padding:4rem 2rem;color:var(--muted)}
 .empty-state i{font-size:2.5rem;opacity:.3;margin-bottom:1rem;display:block}
-.empty-state p{font-size:.9rem}
-
-/* Settings */
+/* SETTINGS */
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .settings-card{background:var(--white);border-radius:6px;border:1px solid var(--sand);padding:1.75rem}
 .settings-card.full{grid-column:1/-1}
@@ -148,22 +124,19 @@ img{display:block;max-width:100%}
 .fg{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem}
 .fg label{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo)}
 .fg input,.fg textarea,.fg select{padding:.75rem 1rem;border:1px solid var(--sand-d);background:var(--cream);border-radius:2px;font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
-.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--tc);box-shadow:0 0 0 3px rgba(193,97,58,.08)}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--tc);box-shadow:0 0 0 3px rgba(125,93,75,.08)}
 .fg textarea{resize:vertical;min-height:90px}
 .save-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.4rem;background:var(--olive);color:#fff;border-radius:3px;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:none;transition:background .2s}
-.save-btn:hover{background:#5a6a3b}
-.save-ok{display:none;color:var(--success);font-size:.82rem;font-weight:600;margin-left:.75rem;vertical-align:middle}
+.save-btn:hover{background:#4a7249}
+.save-ok{display:none;color:var(--success);font-size:.82rem;font-weight:600;margin-left:.75rem}
 .save-ok.show{display:inline}
-
-/* Image upload */
+/* IMAGE UPLOAD */
 .img-upload-area{border:2px dashed var(--sand-d);border-radius:4px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;background:var(--cream)}
-.img-upload-area:hover{border-color:var(--tc);background:rgba(193,97,58,.03)}
+.img-upload-area:hover{border-color:var(--tc);background:rgba(125,93,75,.03)}
 .img-upload-area input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .img-upload-area i{font-size:1.6rem;color:var(--muted);margin-bottom:.5rem;opacity:.5;display:block}
 .img-upload-area p{font-size:.8rem;color:var(--muted)}
-.img-upload-area .or{font-size:.7rem;color:var(--sand-d);margin:.4rem 0}
 .img-preview{width:100%;max-height:180px;object-fit:cover;border-radius:3px;margin-top:.75rem}
-
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;z-index:2000;background:rgba(26,23,20,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
@@ -179,18 +152,16 @@ img{display:block;max-width:100%}
 .btn-save:hover{background:var(--tc-d)}
 .btn-cancel{padding:.65rem 1.25rem;background:var(--sand);color:var(--indigo);border-radius:2px;font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--sand-d);transition:all .2s}
 .btn-cancel:hover{background:var(--sand-d)}
-
-/* CONFIRM DIALOG */
+/* CONFIRM */
 #confirm-bg{display:none;position:fixed;inset:0;z-index:3000;background:rgba(26,23,20,.7);align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 #confirm-bg.open{display:flex}
 .confirm-box{background:var(--white);border-radius:8px;padding:2rem;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(26,23,20,.3);text-align:center}
 .confirm-box .warn-icon{font-size:2rem;color:var(--danger);margin-bottom:1rem}
-.confirm-box h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--indigo);margin-bottom:.5rem}
+.confirm-box h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--indigo);margin-bottom:.5rem}
 .confirm-box p{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
 .confirm-btns{display:flex;gap:.75rem;justify-content:center}
 .btn-danger{padding:.65rem 1.5rem;background:var(--danger);color:#fff;border-radius:2px;font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:none;transition:background .2s}
 .btn-danger:hover{background:#a93226}
-
 /* TOAST */
 #toast{position:fixed;bottom:2rem;right:2rem;z-index:9000;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
 .toast-msg{padding:.75rem 1.25rem;border-radius:4px;font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 16px rgba(26,23,20,.2);animation:toastIn .3s ease;pointer-events:none}
@@ -198,8 +169,7 @@ img{display:block;max-width:100%}
 .toast-msg.success{background:var(--success);color:#fff}
 .toast-msg.error{background:var(--danger);color:#fff}
 .toast-msg.info{background:var(--indigo);color:#fff}
-
-/* RESPONSIVE */
+.toast-msg.saving{background:#c87800;color:#fff}
 @media(max-width:900px){
   #sidebar{width:56px}
   .sb-head .sb-sub,.nav-item span,.sb-section,.logout-btn span{display:none}
@@ -221,15 +191,15 @@ img{display:block;max-width:100%}
 <!-- LOGIN PAGE -->
 <div id="login-page">
   <div class="login-card">
-    <div class="login-logo">Namu <span>Spaces</span></div>
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem"><img src="data:image/jpeg;base64,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" alt="Namu Spaces" style="height:64px;width:auto;display:block;object-fit:contain"><span style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--sand);line-height:1">Namu <span style="color:var(--tc-l)">Spaces</span></span></div>
     <div class="login-subtitle">Admin Panel</div>
     <div class="l-field">
       <label>Email</label>
-      <input type="email" id="l-email" placeholder="admin@namuspaces" autocomplete="username"/>
+      <input type="email" id="l-email" placeholder="admin@namuspaces" autocomplete="username">
     </div>
     <div class="l-field">
       <label>Password</label>
-      <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password"/>
+      <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password">
     </div>
     <button class="login-btn" onclick="doLogin()">Sign In to Admin Panel</button>
     <div class="login-err" id="l-err">Invalid email or password. Please try again.</div>
@@ -239,200 +209,140 @@ img{display:block;max-width:100%}
 
 <!-- APP -->
 <div id="app">
-  <!-- Sidebar -->
   <aside id="sidebar">
     <div class="sb-head">
-      <div class="sb-logo">Namu <span>Spaces</span></div>
+      <div style="display:flex;align-items:center;gap:.55rem"><img src="data:image/jpeg;base64,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" alt="Namu Spaces" style="height:38px;width:auto;display:block;object-fit:contain"><span style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--sand);line-height:1">Namu <span style="color:var(--tc-l)">Spaces</span></span></div>
       <div class="sb-sub">Admin Panel</div>
     </div>
     <nav class="sb-nav">
       <div class="sb-section">Overview</div>
-      <div class="nav-item active" onclick="switchPanel('dashboard',this)">
-        <i class="fas fa-th-large"></i><span>Dashboard</span>
-      </div>
+      <div class="nav-item active" onclick="switchPanel('dashboard',this)"><i class="fas fa-th-large"></i><span>Dashboard</span></div>
       <div class="sb-section">Content</div>
-      <div class="nav-item" onclick="switchPanel('projects',this)">
-        <i class="fas fa-images"></i><span>Projects</span>
-      </div>
-      <div class="nav-item" onclick="switchPanel('services',this)">
-        <i class="fas fa-star"></i><span>Services</span>
-      </div>
-      <div class="nav-item" onclick="switchPanel('team',this)">
-        <i class="fas fa-users"></i><span>Team</span>
-      </div>
-      <div class="nav-item" onclick="switchPanel('blog',this)">
-        <i class="fas fa-pen-nib"></i><span>Blog / Journal</span>
-      </div>
-      <div class="nav-item" onclick="switchPanel('testimonials',this)">
-        <i class="fas fa-quote-left"></i><span>Testimonials</span>
-      </div>
+      <div class="nav-item" onclick="switchPanel('projects',this)"><i class="fas fa-images"></i><span>Projects</span></div>
+      <div class="nav-item" onclick="switchPanel('services',this)"><i class="fas fa-star"></i><span>Services</span></div>
+      <div class="nav-item" onclick="switchPanel('team',this)"><i class="fas fa-users"></i><span>Team</span></div>
+      <div class="nav-item" onclick="switchPanel('blog',this)"><i class="fas fa-pen-nib"></i><span>Blog / Journal</span></div>
+      <div class="nav-item" onclick="switchPanel('testimonials',this)"><i class="fas fa-quote-left"></i><span>Testimonials</span></div>
       <div class="sb-section">Configuration</div>
-      <div class="nav-item" onclick="switchPanel('settings',this)">
-        <i class="fas fa-cog"></i><span>Site Settings</span>
-      </div>
+      <div class="nav-item" onclick="switchPanel('settings',this)"><i class="fas fa-cog"></i><span>Site Settings</span></div>
     </nav>
     <div class="sb-foot">
-      <button class="logout-btn" onclick="logout()">
-        <i class="fas fa-sign-out-alt"></i><span>Logout</span>
-      </button>
+      <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
     </div>
   </aside>
 
-  <!-- Main -->
   <div id="main">
     <div id="topbar">
       <div class="topbar-title" id="panel-title">Dashboard</div>
       <div class="topbar-right">
+        <span class="sync-badge live" id="sync-badge"><i class="fas fa-circle"></i> Live — changes save to all devices</span>
         <a class="view-site" href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Site</a>
       </div>
     </div>
 
     <div id="content">
-
       <!-- DASHBOARD -->
       <div class="panel active" id="panel-dashboard">
         <div class="stats-grid" id="stats-grid"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-          <div class="dash-section">
-            <h3><i class="fas fa-images" style="color:var(--tc);margin-right:.5rem"></i>Recent Projects</h3>
-            <div class="dash-list" id="recent-projects"></div>
-          </div>
-          <div class="dash-section">
-            <h3><i class="fas fa-pen-nib" style="color:var(--tc);margin-right:.5rem"></i>Recent Blog Posts</h3>
-            <div class="dash-list" id="recent-blog"></div>
-          </div>
+          <div class="dash-section"><h3><i class="fas fa-images" style="color:var(--tc);margin-right:.5rem"></i>Recent Projects</h3><div class="dash-list" id="recent-projects"></div></div>
+          <div class="dash-section"><h3><i class="fas fa-pen-nib" style="color:var(--tc);margin-right:.5rem"></i>Recent Blog Posts</h3><div class="dash-list" id="recent-blog"></div></div>
         </div>
       </div>
-
       <!-- PROJECTS -->
       <div class="panel" id="panel-projects">
-        <div class="section-bar">
-          <h2>Projects</h2>
-          <button class="add-btn" onclick="openItemModal('project')"><i class="fas fa-plus"></i> Add Project</button>
-        </div>
+        <div class="section-bar"><h2>Projects</h2><button class="add-btn" onclick="openItemModal('project')"><i class="fas fa-plus"></i> Add Project</button></div>
         <div class="cards-grid" id="projects-grid"></div>
       </div>
-
       <!-- SERVICES -->
       <div class="panel" id="panel-services">
-        <div class="section-bar">
-          <h2>Services</h2>
-          <button class="add-btn" onclick="openItemModal('service')"><i class="fas fa-plus"></i> Add Service</button>
-        </div>
+        <div class="section-bar"><h2>Services</h2><button class="add-btn" onclick="openItemModal('service')"><i class="fas fa-plus"></i> Add Service</button></div>
         <div class="cards-grid" id="services-grid"></div>
       </div>
-
       <!-- TEAM -->
       <div class="panel" id="panel-team">
-        <div class="section-bar">
-          <h2>Team Members</h2>
-          <button class="add-btn" onclick="openItemModal('team')"><i class="fas fa-plus"></i> Add Member</button>
-        </div>
+        <div class="section-bar"><h2>Team Members</h2><button class="add-btn" onclick="openItemModal('team')"><i class="fas fa-plus"></i> Add Member</button></div>
         <div class="cards-grid" id="team-grid"></div>
       </div>
-
       <!-- BLOG -->
       <div class="panel" id="panel-blog">
-        <div class="section-bar">
-          <h2>Blog / Journal</h2>
-          <button class="add-btn" onclick="openItemModal('blog')"><i class="fas fa-plus"></i> Add Post</button>
-        </div>
+        <div class="section-bar"><h2>Blog / Journal</h2><button class="add-btn" onclick="openItemModal('blog')"><i class="fas fa-plus"></i> Add Post</button></div>
         <div class="cards-grid" id="blog-grid"></div>
       </div>
-
       <!-- TESTIMONIALS -->
       <div class="panel" id="panel-testimonials">
-        <div class="section-bar">
-          <h2>Testimonials</h2>
-          <button class="add-btn" onclick="openItemModal('testimonial')"><i class="fas fa-plus"></i> Add Testimonial</button>
-        </div>
+        <div class="section-bar"><h2>Testimonials</h2><button class="add-btn" onclick="openItemModal('testimonial')"><i class="fas fa-plus"></i> Add Testimonial</button></div>
         <div class="cards-grid" id="testimonials-grid"></div>
       </div>
-
       <!-- SETTINGS -->
       <div class="panel" id="panel-settings">
         <div class="section-bar"><h2>Site Settings</h2></div>
         <div class="settings-grid">
-
-          <!-- Hero -->
           <div class="settings-card full">
             <h3><i class="fas fa-home" style="color:var(--tc);margin-right:.5rem"></i>Homepage Hero</h3>
             <div class="form-row">
-              <div class="fg"><label>Eyebrow Text</label><input id="st-heroEyebrow"/></div>
-              <div class="fg"><label>Main Title</label><input id="st-heroTitle"/></div>
+              <div class="fg"><label>Eyebrow Text</label><input id="st-heroEyebrow"></div>
+              <div class="fg"><label>Main Title</label><input id="st-heroTitle"></div>
             </div>
             <div class="form-row">
-              <div class="fg"><label>Italic Accent Text</label><input id="st-heroTitleEm"/></div>
-              <div class="fg"><label>Subtitle</label><input id="st-heroSub"/></div>
+              <div class="fg"><label>Italic Accent Text</label><input id="st-heroTitleEm"></div>
+              <div class="fg"><label>Subtitle</label><input id="st-heroSub"></div>
             </div>
             <div class="fg">
               <label>Hero Background Image</label>
               <div class="img-upload-area">
-                <input type="file" accept="image/png,image/jpeg,image/jpg,image/webp" onchange="handleImgUpload(this,'st-heroBg','hero-preview')"/>
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p>Click or drag &amp; drop a .png / .jpeg</p>
-                <div class="or">— or paste URL below —</div>
+                <input type="file" accept="image/png,image/jpeg,image/jpg,image/webp" onchange="handleImgUpload(this,'st-heroBg','hero-preview')">
+                <i class="fas fa-cloud-upload-alt"></i><p>Click or drag &amp; drop a .png / .jpeg</p>
               </div>
-              <input id="st-heroBg" type="url" placeholder="https://..." style="margin-top:.5rem"/>
-              <img id="hero-preview" class="img-preview" src="" alt="" style="display:none"/>
+              <input id="st-heroBg" type="url" placeholder="or paste URL" style="margin-top:.5rem">
+              <img id="hero-preview" class="img-preview" src="" style="display:none">
             </div>
             <button class="save-btn" onclick="saveSettings()"><i class="fas fa-save"></i> Save Hero</button>
             <span class="save-ok" id="save-ok-hero"><i class="fas fa-check"></i> Saved!</span>
           </div>
-
-          <!-- Contact Info -->
           <div class="settings-card">
             <h3><i class="fas fa-address-book" style="color:var(--tc);margin-right:.5rem"></i>Contact Information</h3>
-            <div class="fg"><label>Phone</label><input id="st-phone" type="tel"/></div>
-            <div class="fg"><label>Email</label><input id="st-email" type="email"/></div>
-            <div class="fg"><label>WhatsApp (country code, no +)</label><input id="st-whatsapp" placeholder="254712345678"/></div>
+            <div class="fg"><label>Phone</label><input id="st-phone" type="tel"></div>
+            <div class="fg"><label>Email</label><input id="st-email" type="email"></div>
+            <div class="fg"><label>WhatsApp (country code, no +)</label><input id="st-whatsapp" placeholder="254712345678"></div>
             <div class="fg"><label>Location / Address</label><textarea id="st-location"></textarea></div>
             <div class="fg"><label>Footer About Text</label><textarea id="st-footerAbout"></textarea></div>
             <button class="save-btn" onclick="saveSettings()"><i class="fas fa-save"></i> Save</button>
             <span class="save-ok" id="save-ok-contact"><i class="fas fa-check"></i> Saved!</span>
           </div>
-
-          <!-- Social -->
           <div class="settings-card">
             <h3><i class="fas fa-share-alt" style="color:var(--tc);margin-right:.5rem"></i>Social Media Links</h3>
-            <div class="fg"><label><i class="fab fa-instagram" style="color:#E1306C;margin-right:.35rem"></i>Instagram</label><input id="st-instagram" type="url" placeholder="https://instagram.com/..."/></div>
-            <div class="fg"><label><i class="fab fa-facebook-f" style="color:#1877F2;margin-right:.35rem"></i>Facebook</label><input id="st-facebook" type="url" placeholder="https://facebook.com/..."/></div>
-            <div class="fg"><label><i class="fab fa-tiktok" style="margin-right:.35rem"></i>TikTok</label><input id="st-tiktok" type="url" placeholder="https://tiktok.com/@..."/></div>
-            <div class="fg"><label><i class="fab fa-pinterest-p" style="color:#E60023;margin-right:.35rem"></i>Pinterest</label><input id="st-pinterest" type="url" placeholder="https://pinterest.com/..."/></div>
+            <div class="fg"><label><i class="fab fa-instagram" style="color:#E1306C;margin-right:.35rem"></i>Instagram</label><input id="st-instagram" type="url" placeholder="https://instagram.com/..."></div>
+            <div class="fg"><label><i class="fab fa-facebook-f" style="color:#1877F2;margin-right:.35rem"></i>Facebook</label><input id="st-facebook" type="url" placeholder="https://facebook.com/..."></div>
+            <div class="fg"><label><i class="fab fa-tiktok" style="margin-right:.35rem"></i>TikTok</label><input id="st-tiktok" type="url" placeholder="https://tiktok.com/@..."></div>
+            <div class="fg"><label><i class="fab fa-pinterest-p" style="color:#E60023;margin-right:.35rem"></i>Pinterest</label><input id="st-pinterest" type="url" placeholder="https://pinterest.com/..."></div>
             <button class="save-btn" onclick="saveSettings()"><i class="fas fa-save"></i> Save</button>
             <span class="save-ok" id="save-ok-social"><i class="fas fa-check"></i> Saved!</span>
           </div>
-
-          <!-- About Image -->
           <div class="settings-card">
             <h3><i class="fas fa-image" style="color:var(--tc);margin-right:.5rem"></i>About Section Image</h3>
             <div class="fg">
               <label>Upload or Enter URL</label>
               <div class="img-upload-area">
-                <input type="file" accept="image/png,image/jpeg,image/jpg,image/webp" onchange="handleImgUpload(this,'st-aboutImg','about-preview')"/>
+                <input type="file" accept="image/png,image/jpeg,image/jpg,image/webp" onchange="handleImgUpload(this,'st-aboutImg','about-preview')">
                 <i class="fas fa-cloud-upload-alt"></i><p>Click or drag &amp; drop</p>
               </div>
-              <input id="st-aboutImg" type="url" placeholder="https://..." style="margin-top:.5rem"/>
-              <img id="about-preview" class="img-preview" src="" alt="" style="display:none"/>
+              <input id="st-aboutImg" type="url" placeholder="or paste URL" style="margin-top:.5rem">
+              <img id="about-preview" class="img-preview" src="" style="display:none">
             </div>
             <button class="save-btn" onclick="saveSettings()"><i class="fas fa-save"></i> Save</button>
             <span class="save-ok" id="save-ok-about"><i class="fas fa-check"></i> Saved!</span>
           </div>
-
-        </div><!-- /settings-grid -->
-      </div><!-- /panel-settings -->
-
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /app -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ITEM MODAL -->
 <div class="modal-bg" id="item-modal">
   <div class="modal">
-    <div class="modal-head">
-      <h2 id="modal-title">Add Item</h2>
-      <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    </div>
+    <div class="modal-head"><h2 id="modal-title">Add Item</h2><button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button></div>
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
@@ -454,30 +364,38 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
-<script>
-/* ══════════════════════════════════════════════════════════
-   NAMU SPACES ADMIN PANEL
-   ══════════════════════════════════════════════════════════ */
+<!-- ═══ FIREBASE SDK ═══ -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-const CREDS = {email:'admin@namuspaces', pass:'password123'};
-let currentType = null;
-let editingId   = null;
+/* ══════════════════════════════════════════════
+   🔥 PASTE YOUR FIREBASE CONFIG BELOW
+   Get it from: Firebase Console → Project Settings → Your Apps
+══════════════════════════════════════════════ */
+const firebaseConfig = {
+    apiKey: "AIzaSyAFSRe3GSXLmkF238BuaacXQvYx2PuWz0o",
+    authDomain: "namu-spaces.firebaseapp.com",
+    projectId: "namu-spaces",
+    storageBucket: "namu-spaces.firebasestorage.app",
+    messagingSenderId: "231642391903",
+    appId: "1:231642391903:web:16a95d7c8b6ae9c16502ea",
+  };
 
-/* ── Default Data ── */
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+/* ── Default data ── */
 const DEF = {
   settings:{
     phone:'+254 712 345 678', email:'hello@namuspaces.co.ke',
-    location:'The Mirage, Westlands,\nNairobi, Kenya',
-    whatsapp:'254712345678',
-    instagram:'https://instagram.com/namuspaces',
-    facebook:'https://facebook.com/namuspaces',
-    tiktok:'https://tiktok.com/@namuspaces',
-    pinterest:'https://pinterest.com/namuspaces',
+    location:'The Mirage, Westlands, Nairobi, Kenya', whatsapp:'254712345678',
+    instagram:'https://instagram.com/namuspaces', facebook:'https://facebook.com/namuspaces',
+    tiktok:'https://tiktok.com/@namuspaces', pinterest:'https://pinterest.com/namuspaces',
     heroTitle:'Designing Spaces,', heroTitleEm:'Inspiring Lives',
-    heroSub:"We craft thoughtful, culturally rich interiors that balance beauty with function — rooted in Nairobi's vibrant spirit.",
+    heroSub:"We craft thoughtful, culturally rich interiors that balance beauty with function — rooted in Kenya's vibrant landscape and spirit.",
     heroEyebrow:'Interior Design Studio · Nairobi, Kenya',
     heroBg:'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80',
     footerAbout:"Nairobi's premier interior design studio, crafting spaces that balance beauty, culture, and function since 2014.",
@@ -499,9 +417,9 @@ const DEF = {
     {id:'p5',title:'Lavington Study',category:'Custom Furniture',desc:'Bespoke bookcase and desk suite for a home library.',image:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80'}
   ],
   team:[
-    {id:'t1',name:'Medina Wabomba',role:'Principal Designer',bio:'15 years crafting spaces across East Africa.',image:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80'},
+    {id:'t1',name:'Amara Njeri',role:'Principal Designer',bio:'15 years crafting spaces across East Africa.',image:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80'},
     {id:'t2',name:'David Kamau',role:'Commercial Lead',bio:'Specialist in high-end commercial interiors.',image:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80'},
-    {id:'t3',name:'Siti Omondi',role:'Furniture & Craft',bio:'Bridging local artisanship with contemporary form.',image:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80'}
+    {id:'t3',name:'Siti Omondi',role:'Furniture & Craft',bio:"Bridging local artisanship with contemporary form.",image:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80'}
   ],
   testimonials:[
     {id:'r1',text:'Namu Spaces completely transformed our apartment. Every detail felt personal and intentional.',author:'Grace M.',role:'Kilimani Resident',stars:5},
@@ -510,299 +428,303 @@ const DEF = {
   ],
   blog:[
     {id:'b1',title:"5 Ways to Bring Nairobi's Warmth Into Your Home",category:'Design Tips',excerpt:'Discover how earthy terracottas and handcrafted textiles can transform your space.',date:'Mar 1, 2024',image:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80'},
-    {id:'b2',title:'The Case for Open-Plan Living in Kenyan Homes',category:'Trend Report',excerpt:'Open-plan design is sweeping Nairobi\'s residential market.',date:'Feb 15, 2024',image:'https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?w=600&q=80'},
-    {id:'b3',title:"Sustainable Sourcing: Supporting Kenya's Artisans",category:'Sustainability',excerpt:'How choosing locally-made furniture supports communities and elevates spaces.',date:'Jan 30, 2024',image:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80'}
+    {id:'b2',title:'The Case for Open-Plan Living in Kenyan Homes',category:'Trend Report',excerpt:"Open-plan design is sweeping Nairobi's residential market.",date:'Feb 15, 2024',image:'https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?w=600&q=80'},
+    {id:'b3',title:"Sustainable Sourcing: Supporting Kenya's Artisans",category:'Sustainability',excerpt:'How choosing locally-made furniture supports communities.',date:'Jan 30, 2024',image:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80'}
   ]
 };
 
-/* ── LocalStorage helpers ── */
-function ls(key, val) {
-  if(val===undefined) {
-    try{const v=localStorage.getItem('ns_'+key);return v?JSON.parse(v):null;}catch{return null;}
-  } else {
-    if(val===null) localStorage.removeItem('ns_'+key);
-    else localStorage.setItem('ns_'+key, JSON.stringify(val));
+/* ── In-memory store (kept in sync with Firestore) ── */
+const store = {};
+
+/* ── Firestore helpers ── */
+function setSyncBadge(state){
+  const b = document.getElementById('sync-badge');
+  if(!b) return;
+  b.className = 'sync-badge ' + state;
+  if(state==='live') b.innerHTML = '<i class="fas fa-circle"></i> Live — changes save to all devices';
+  else if(state==='saving') b.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+  else b.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Firebase not connected';
+}
+
+async function fbSave(collection, value) {
+  setSyncBadge('saving');
+  try {
+    await setDoc(doc(db, 'namu_content', collection), { value });
+    setSyncBadge('live');
+    return true;
+  } catch(err) {
+    console.error('Save error:', err);
+    setSyncBadge('error');
+    toast('Save failed — check Firebase config', 'error');
+    return false;
   }
 }
-function getData(key){ return ls(key) || DEF[key] || []; }
 
-/* ── Escape ── */
-function esc(s){
-  if(s==null) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
+/* Subscribe to all collections */
+['settings','services','projects','team','testimonials','blog'].forEach(function(col){
+  onSnapshot(doc(db, 'namu_content', col), function(snap){
+    store[col] = (snap.exists() && snap.data().value) ? snap.data().value : DEF[col];
+    // Refresh current panel if it matches
+    if(col !== 'settings' && document.getElementById('panel-'+col+'s') &&
+       document.getElementById('panel-'+col+'s').classList.contains('active')) {
+      renderList(col+'s');
+    }
+    if(col === 'settings' && document.getElementById('panel-settings') &&
+       document.getElementById('panel-settings').classList.contains('active')) {
+      loadSettingsForm();
+    }
+    renderDashboard();
+  }, function(err){
+    store[col] = DEF[col];
+    setSyncBadge('error');
+  });
+});
 
-/* ── Auth ── */
-function doLogin() {
-  const e=document.getElementById('l-email').value.trim();
-  const p=document.getElementById('l-pass').value;
+function getData(key) { return store[key] || DEF[key] || []; }
+
+/* ── Expose globals needed by inline onclick handlers ── */
+window.esc = function(s){ if(s==null) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); };
+const esc = window.esc;
+
+const CREDS = {email:'admin@namuspaces', pass:'password123'};
+let currentType = null;
+let editingId   = null;
+
+window.doLogin = function() {
+  const e = document.getElementById('l-email').value.trim();
+  const p = document.getElementById('l-pass').value;
   if(e===CREDS.email && p===CREDS.pass) {
-    ls('admin_session','active');
+    sessionStorage.setItem('ns_admin','active');
     showApp();
   } else {
     document.getElementById('l-err').classList.add('show');
     document.getElementById('l-pass').value='';
   }
-}
+};
+
 function showApp() {
   document.getElementById('login-page').classList.add('hidden');
   document.getElementById('app').classList.add('visible');
   renderDashboard();
   loadSettingsForm();
 }
-function logout() {
-  ls('admin_session', null);
+
+window.logout = function() {
+  sessionStorage.removeItem('ns_admin');
   document.getElementById('app').classList.remove('visible');
   document.getElementById('login-page').classList.remove('hidden');
   document.getElementById('l-pass').value='';
   document.getElementById('l-err').classList.remove('show');
-}
+};
 
-/* Init */
-window.addEventListener('DOMContentLoaded',()=>{
-  if(ls('admin_session')==='active') showApp();
-  document.getElementById('l-email').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('l-pass').focus();});
-  document.getElementById('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+window.addEventListener('DOMContentLoaded',function(){
+  if(sessionStorage.getItem('ns_admin')==='active') showApp();
+  document.getElementById('l-email').addEventListener('keydown',function(e){if(e.key==='Enter') document.getElementById('l-pass').focus();});
+  document.getElementById('l-pass').addEventListener('keydown',function(e){if(e.key==='Enter') doLogin();});
 });
 
-/* ── Panel switching ── */
 const panelTitles = {dashboard:'Dashboard',projects:'Projects',services:'Services',team:'Team Members',blog:'Blog / Journal',testimonials:'Testimonials',settings:'Site Settings'};
-function switchPanel(name, el) {
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+window.switchPanel = function(name, el) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
   document.getElementById('panel-'+name).classList.add('active');
   el.classList.add('active');
   document.getElementById('panel-title').textContent = panelTitles[name]||name;
   if(name==='dashboard') renderDashboard();
-  else if(name!=='settings') renderList(name);
-}
+  else if(name==='settings') loadSettingsForm();
+  else renderList(name+'s');
+};
 
-/* ═══ DASHBOARD ════════════════════════════════════════════ */
+/* ═══ DASHBOARD ═══ */
 function renderDashboard() {
   const sv=getData('services'),pr=getData('projects'),tm=getData('team'),bl=getData('blog'),te=getData('testimonials');
-  document.getElementById('stats-grid').innerHTML=[
-    {icon:'fa-images',num:pr.length,label:'Projects',col:'--tc'},
-    {icon:'fa-star',num:sv.length,label:'Services',col:'--olive'},
-    {icon:'fa-users',num:tm.length,label:'Team Members',col:'--indigo'},
-    {icon:'fa-pen-nib',num:bl.length,label:'Blog Posts',col:'--tc-d'},
-    {icon:'fa-quote-left',num:te.length,label:'Testimonials',col:'--indigo-l'}
-  ].map(s=>`<div class="stat-card"><div class="stat-icon"><i class="fas ${s.icon}"></i></div><div class="stat-num" style="color:var(${s.col})">${s.num}</div><div class="stat-label">${s.label}</div></div>`).join('');
+  const sg = document.getElementById('stats-grid');
+  if(sg) sg.innerHTML=[
+    {icon:'fa-images',num:pr.length,label:'Projects'},
+    {icon:'fa-star',num:sv.length,label:'Services'},
+    {icon:'fa-users',num:tm.length,label:'Team Members'},
+    {icon:'fa-pen-nib',num:bl.length,label:'Blog Posts'},
+    {icon:'fa-quote-left',num:te.length,label:'Testimonials'}
+  ].map(function(s){ return '<div class="stat-card"><div class="stat-icon"><i class="fas '+s.icon+'"></i></div><div class="stat-num">'+s.num+'</div><div class="stat-label">'+s.label+'</div></div>'; }).join('');
 
-  document.getElementById('recent-projects').innerHTML = pr.slice(0,5).map(p=>`
-    <div class="dash-item"><span>${esc(p.title)}</span><span class="dash-badge">${esc(p.category)}</span></div>`
-  ).join('') || '<div class="dash-item"><span style="color:var(--muted)">No projects yet.</span></div>';
+  const rp = document.getElementById('recent-projects');
+  if(rp) rp.innerHTML = pr.slice(0,5).map(function(p){ return '<div class="dash-item"><span>'+esc(p.title)+'</span><span class="dash-badge">'+esc(p.category)+'</span></div>'; }).join('') || '<div class="dash-item"><span style="color:var(--muted)">No projects yet.</span></div>';
 
-  document.getElementById('recent-blog').innerHTML = bl.slice(0,5).map(b=>`
-    <div class="dash-item"><span>${esc(b.title)}</span><span class="dash-badge">${esc(b.date)}</span></div>`
-  ).join('') || '<div class="dash-item"><span style="color:var(--muted)">No posts yet.</span></div>';
+  const rb = document.getElementById('recent-blog');
+  if(rb) rb.innerHTML = bl.slice(0,5).map(function(b){ return '<div class="dash-item"><span>'+esc(b.title)+'</span><span class="dash-badge">'+esc(b.date)+'</span></div>'; }).join('') || '<div class="dash-item"><span style="color:var(--muted)">No posts yet.</span></div>';
 }
 
-/* ═══ LIST RENDERERS ════════════════════════════════════════ */
+/* ═══ LIST RENDERERS ═══ */
 function renderList(type) {
-  const items=getData(type), gridId=type+'-grid', grid=document.getElementById(gridId);
+  /* type is pluralised e.g. "projects", singular is type.replace(/s$/,'') */
+  const singular = type.replace(/s$/, '').replace(/testimonial$/, 'testimonial');
+  const items = getData(singular==='testimonial'?'testimonials':type);
+  const grid = document.getElementById(type+'-grid');
   if(!grid) return;
   if(!items.length){
-    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-inbox"></i><p>No ${type} yet. Click "Add" to get started.</p></div>`;
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-inbox"></i><p>No '+type+' yet. Click "Add" to get started.</p></div>';
     return;
   }
-  grid.innerHTML=items.map(item=>renderCard(type,item)).join('');
+  grid.innerHTML = items.map(function(item){ return renderCard(singular, item); }).join('');
 }
 
 function renderCard(type, item) {
-  const acts=`
-    <div class="item-card-actions">
-      <button class="act-btn edit-act" onclick="openItemModal('${type}','${esc(item.id)}')"><i class="fas fa-pen"></i> Edit</button>
-      <button class="act-btn del-act" onclick="confirmDelete('${type}','${esc(item.id)}','${esc(item.title||item.name||item.author||'')}')"><i class="fas fa-trash"></i> Delete</button>
-    </div>`;
-  const fallback='https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=60';
+  const fb = 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=60';
+  const acts = '<div class="item-card-actions"><button class="act-btn edit-act" onclick="openItemModal(\''+type+'\',\''+esc(item.id)+'\')"><i class="fas fa-pen"></i> Edit</button><button class="act-btn del-act" onclick="confirmDelete(\''+type+'\',\''+esc(item.id)+'\',\''+esc(item.title||item.name||item.author||'')+'\')"><i class="fas fa-trash"></i> Delete</button></div>';
   switch(type){
-    case 'projects': return `<div class="item-card">
-      <img class="item-card-img" src="${esc(item.image)||fallback}" onerror="this.src='${fallback}'" alt="${esc(item.title)}"/>
-      <div class="item-card-body"><div class="item-card-sub">${esc(item.category)}</div><div class="item-card-title">${esc(item.title)}</div><div class="item-card-desc">${esc(item.desc)}</div>${acts}</div></div>`;
-    case 'services': return `<div class="item-card">
-      <div class="item-card-body" style="padding-top:1.75rem"><div style="font-size:1.8rem;color:var(--tc);margin-bottom:.75rem"><i class="fas ${item.icon||'fa-star'}"></i></div>
-      <div class="item-card-title">${esc(item.name)}</div><div class="item-card-desc">${esc(item.desc)}</div>${acts}</div></div>`;
-    case 'team': return `<div class="item-card">
-      <img class="item-card-img team-card-img" src="${esc(item.image)||fallback}" onerror="this.src='${fallback}'" alt="${esc(item.name)}"/>
-      <div class="item-card-body"><div class="item-card-sub">${esc(item.role)}</div><div class="item-card-title">${esc(item.name)}</div><div class="item-card-desc">${esc(item.bio)}</div>${acts}</div></div>`;
-    case 'blog': return `<div class="item-card">
-      <img class="item-card-img" src="${esc(item.image)||fallback}" onerror="this.src='${fallback}'" alt="${esc(item.title)}"/>
-      <div class="item-card-body"><div class="item-card-sub">${esc(item.category)} · ${esc(item.date)}</div><div class="item-card-title">${esc(item.title)}</div><div class="item-card-desc">${esc(item.excerpt)}</div>${acts}</div></div>`;
-    case 'testimonials': return `<div class="item-card">
-      <div class="item-card-body" style="padding-top:1.75rem">
-      <div style="color:#F39C12;margin-bottom:.5rem">${'★'.repeat(item.stars||5)}</div>
-      <div class="item-card-desc" style="font-style:italic">"${esc(item.text)}"</div>
-      <div class="item-card-sub" style="margin-top:.6rem">${esc(item.author)}</div>
-      <div style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">${esc(item.role)}</div>${acts}</div></div>`;
+    case 'project': return '<div class="item-card"><img class="item-card-img" src="'+esc(item.image||fb)+'" onerror="this.src=\''+fb+'\'" alt="'+esc(item.title)+'"><div class="item-card-body"><div class="item-card-sub">'+esc(item.category)+'</div><div class="item-card-title">'+esc(item.title)+'</div><div class="item-card-desc">'+esc(item.desc)+'</div>'+acts+'</div></div>';
+    case 'service': return '<div class="item-card"><div class="item-card-body" style="padding-top:1.75rem"><div style="font-size:1.8rem;color:var(--tc);margin-bottom:.75rem"><i class="fas '+(item.icon||'fa-star')+'"></i></div><div class="item-card-title">'+esc(item.name)+'</div><div class="item-card-desc">'+esc(item.desc)+'</div>'+acts+'</div></div>';
+    case 'team': return '<div class="item-card"><img class="item-card-img team-card-img" src="'+esc(item.image||fb)+'" onerror="this.src=\''+fb+'\'" alt="'+esc(item.name)+'"><div class="item-card-body"><div class="item-card-sub">'+esc(item.role)+'</div><div class="item-card-title">'+esc(item.name)+'</div><div class="item-card-desc">'+esc(item.bio)+'</div>'+acts+'</div></div>';
+    case 'blog': return '<div class="item-card"><img class="item-card-img" src="'+esc(item.image||fb)+'" onerror="this.src=\''+fb+'\'" alt="'+esc(item.title)+'"><div class="item-card-body"><div class="item-card-sub">'+esc(item.category)+' · '+esc(item.date)+'</div><div class="item-card-title">'+esc(item.title)+'</div><div class="item-card-desc">'+esc(item.excerpt)+'</div>'+acts+'</div></div>';
+    case 'testimonial': return '<div class="item-card"><div class="item-card-body" style="padding-top:1.75rem"><div style="color:#F9A825;margin-bottom:.5rem">'+'★'.repeat(item.stars||5)+'</div><div class="item-card-desc" style="font-style:italic">&ldquo;'+esc(item.text)+'&rdquo;</div><div class="item-card-sub" style="margin-top:.6rem">'+esc(item.author)+'</div><div style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem">'+esc(item.role)+'</div>'+acts+'</div></div>';
   }
   return '';
 }
 
-/* ═══ MODAL ═════════════════════════════════════════════════ */
+/* ═══ MODAL ═══ */
 const FORMS = {
-  project:(d={})=>`
-    <div class="fg"><label>Title *</label><input id="mf-title" value="${esc(d.title||'')}"/></div>
-    <div class="fg"><label>Category</label><select id="mf-category">${['Residential','Commercial','Hospitality','Custom Furniture','Other'].map(c=>`<option${c===d.category?' selected':''}>${c}</option>`).join('')}</select></div>
-    <div class="fg"><label>Description</label><textarea id="mf-desc">${esc(d.desc||'')}</textarea></div>
-    <div class="fg"><label>Image</label>
-    <div class="img-upload-area"><input type="file" accept="image/*" onchange="handleImgUpload(this,'mf-image','mf-prev')"/><i class="fas fa-cloud-upload-alt"></i><p>Upload .png / .jpeg</p></div>
-    <input id="mf-image" type="url" placeholder="or paste URL" style="margin-top:.5rem" value="${esc(d.image||'')}"/>
-    <img id="mf-prev" class="img-preview" src="${esc(d.image||'')}" style="${d.image?'':'display:none'}"/></div>`,
-
-  service:(d={})=>`
-    <div class="fg"><label>Service Name *</label><input id="mf-name" value="${esc(d.name||'')}"/></div>
-    <div class="fg"><label>Icon (Font Awesome class e.g. fa-home)</label><input id="mf-icon" value="${esc(d.icon||'fa-star')}"/></div>
-    <div class="fg"><label>Description</label><textarea id="mf-desc">${esc(d.desc||'')}</textarea></div>`,
-
-  team:(d={})=>`
-    <div class="fg"><label>Full Name *</label><input id="mf-name" value="${esc(d.name||'')}"/></div>
-    <div class="fg"><label>Role / Title</label><input id="mf-role" value="${esc(d.role||'')}"/></div>
-    <div class="fg"><label>Short Bio</label><textarea id="mf-bio">${esc(d.bio||'')}</textarea></div>
-    <div class="fg"><label>Photo</label>
-    <div class="img-upload-area"><input type="file" accept="image/*" onchange="handleImgUpload(this,'mf-image','mf-prev')"/><i class="fas fa-cloud-upload-alt"></i><p>Upload .png / .jpeg</p></div>
-    <input id="mf-image" type="url" placeholder="or paste URL" style="margin-top:.5rem" value="${esc(d.image||'')}"/>
-    <img id="mf-prev" class="img-preview" src="${esc(d.image||'')}" style="${d.image?'':'display:none'}"/></div>`,
-
-  blog:(d={})=>`
-    <div class="fg"><label>Title *</label><input id="mf-title" value="${esc(d.title||'')}"/></div>
-    <div class="fg"><label>Category</label><input id="mf-category" value="${esc(d.category||'Design Tips')}"/></div>
-    <div class="fg"><label>Date</label><input id="mf-date" value="${esc(d.date||new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}))}"/></div>
-    <div class="fg"><label>Excerpt</label><textarea id="mf-excerpt">${esc(d.excerpt||'')}</textarea></div>
-    <div class="fg"><label>Cover Image</label>
-    <div class="img-upload-area"><input type="file" accept="image/*" onchange="handleImgUpload(this,'mf-image','mf-prev')"/><i class="fas fa-cloud-upload-alt"></i><p>Upload .png / .jpeg</p></div>
-    <input id="mf-image" type="url" placeholder="or paste URL" style="margin-top:.5rem" value="${esc(d.image||'')}"/>
-    <img id="mf-prev" class="img-preview" src="${esc(d.image||'')}" style="${d.image?'':'display:none'}"/></div>`,
-
-  testimonial:(d={})=>`
-    <div class="fg"><label>Client Name *</label><input id="mf-author" value="${esc(d.author||'')}"/></div>
-    <div class="fg"><label>Role (e.g. Kilimani Homeowner)</label><input id="mf-role" value="${esc(d.role||'')}"/></div>
-    <div class="fg"><label>Testimonial *</label><textarea id="mf-text">${esc(d.text||'')}</textarea></div>
-    <div class="fg"><label>Stars</label><select id="mf-stars">${[5,4,3,2,1].map(n=>`<option value="${n}"${n===(d.stars||5)?' selected':''}>${n} ★</option>`).join('')}</select></div>`
+  project: function(d={}){ return '<div class="fg"><label>Title *</label><input id="mf-title" value="'+esc(d.title||'')+'"></div><div class="fg"><label>Category</label><select id="mf-category">'+['Residential','Commercial','Hospitality','Custom Furniture','Other'].map(function(c){ return '<option'+(c===d.category?' selected':'')+'>'+c+'</option>'; }).join('')+'</select></div><div class="fg"><label>Description</label><textarea id="mf-desc">'+esc(d.desc||'')+'</textarea></div><div class="fg"><label>Image URL</label><div class="img-upload-area"><input type="file" accept="image/*" onchange="handleImgUpload(this,\'mf-image\',\'mf-prev\')"><i class="fas fa-cloud-upload-alt"></i><p>Upload image</p></div><input id="mf-image" type="url" placeholder="or paste URL" style="margin-top:.5rem" value="'+esc(d.image||'')+'"><img id="mf-prev" class="img-preview" src="'+esc(d.image||'')+'" style="'+(d.image?'':'display:none')+'"></div>'; },
+  service: function(d={}){ return '<div class="fg"><label>Service Name *</label><input id="mf-name" value="'+esc(d.name||'')+'"></div><div class="fg"><label>Icon (Font Awesome e.g. fa-home)</label><input id="mf-icon" value="'+esc(d.icon||'fa-star')+'"></div><div class="fg"><label>Description</label><textarea id="mf-desc">'+esc(d.desc||'')+'</textarea></div>'; },
+  team: function(d={}){ return '<div class="fg"><label>Full Name *</label><input id="mf-name" value="'+esc(d.name||'')+'"></div><div class="fg"><label>Role / Title</label><input id="mf-role" value="'+esc(d.role||'')+'"></div><div class="fg"><label>Short Bio</label><textarea id="mf-bio">'+esc(d.bio||'')+'</textarea></div><div class="fg"><label>Photo</label><div class="img-upload-area"><input type="file" accept="image/*" onchange="handleImgUpload(this,\'mf-image\',\'mf-prev\')"><i class="fas fa-cloud-upload-alt"></i><p>Upload photo</p></div><input id="mf-image" type="url" placeholder="or paste URL" style="margin-top:.5rem" value="'+esc(d.image||'')+'"><img id="mf-prev" class="img-preview" src="'+esc(d.image||'')+'" style="'+(d.image?'':'display:none')+'"></div>'; },
+  blog: function(d={}){ return '<div class="fg"><label>Title *</label><input id="mf-title" value="'+esc(d.title||'')+'"></div><div class="fg"><label>Category</label><input id="mf-category" value="'+esc(d.category||'Design Tips')+'"></div><div class="fg"><label>Date</label><input id="mf-date" value="'+esc(d.date||new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}))+'"></div><div class="fg"><label>Excerpt</label><textarea id="mf-excerpt">'+esc(d.excerpt||'')+'</textarea></div><div class="fg"><label>Cover Image</label><div class="img-upload-area"><input type="file" accept="image/*" onchange="handleImgUpload(this,\'mf-image\',\'mf-prev\')"><i class="fas fa-cloud-upload-alt"></i><p>Upload image</p></div><input id="mf-image" type="url" placeholder="or paste URL" style="margin-top:.5rem" value="'+esc(d.image||'')+'"><img id="mf-prev" class="img-preview" src="'+esc(d.image||'')+'" style="'+(d.image?'':'display:none')+'"></div>'; },
+  testimonial: function(d={}){ return '<div class="fg"><label>Client Name *</label><input id="mf-author" value="'+esc(d.author||'')+'"></div><div class="fg"><label>Role</label><input id="mf-role" value="'+esc(d.role||'')+'"></div><div class="fg"><label>Testimonial *</label><textarea id="mf-text">'+esc(d.text||'')+'</textarea></div><div class="fg"><label>Stars</label><select id="mf-stars">'+[5,4,3,2,1].map(function(n){ return '<option value="'+n+'"'+(n===(d.stars||5)?' selected':'')+'>'+n+' ★</option>'; }).join('')+'</select></div>'; }
 };
 
-function openItemModal(type, id=null) {
+window.openItemModal = function(type, id=null) {
   currentType=type; editingId=id;
-  const items=getData(type), item=id?items.find(i=>i.id===id):{};
-  const T={project:'Project',service:'Service',team:'Team Member',blog:'Blog Post',testimonial:'Testimonial'};
-  document.getElementById('modal-title').textContent=(id?'Edit ':'Add ')+(T[type]||type);
-  document.getElementById('modal-body').innerHTML=FORMS[type](item||{});
-  // URL preview watcher
+  const collKey = type==='testimonial'?'testimonials':type+'s';
+  const items = getData(collKey);
+  const item = id ? items.find(function(i){ return i.id===id; }) : {};
+  const T = {project:'Project',service:'Service',team:'Team Member',blog:'Blog Post',testimonial:'Testimonial'};
+  document.getElementById('modal-title').textContent = (id?'Edit ':'Add ')+(T[type]||type);
+  document.getElementById('modal-body').innerHTML = FORMS[type](item||{});
   const urlEl=document.getElementById('mf-image'), prevEl=document.getElementById('mf-prev');
-  if(urlEl&&prevEl) urlEl.addEventListener('input',()=>{if(urlEl.value){prevEl.src=urlEl.value;prevEl.style.display='block';}else{prevEl.style.display='none';}});
+  if(urlEl&&prevEl) urlEl.addEventListener('input',function(){ prevEl.src=urlEl.value; prevEl.style.display=urlEl.value?'block':'none'; });
   document.getElementById('item-modal').classList.add('open');
   document.body.style.overflow='hidden';
-}
+};
 
-function closeModal(){document.getElementById('item-modal').classList.remove('open');document.body.style.overflow='';currentType=null;editingId=null;}
+window.closeModal = function(){ document.getElementById('item-modal').classList.remove('open'); document.body.style.overflow=''; currentType=null; editingId=null; };
 
-function saveModalItem() {
+window.saveModalItem = async function() {
   const type=currentType; if(!type) return;
-  const items=getData(type);
-  const newData=collectForm(type); if(!newData) return;
+  const collKey = type==='testimonial'?'testimonials':type+'s';
+  const items = [...(getData(collKey))];
+  const newData = collectForm(type); if(!newData) return;
   if(editingId){
-    const idx=items.findIndex(i=>i.id===editingId);
-    if(idx>-1) items[idx]={...items[idx],...newData};
+    const idx = items.findIndex(function(i){ return i.id===editingId; });
+    if(idx>-1) items[idx] = Object.assign({}, items[idx], newData);
   } else {
-    newData.id=type[0]+'_'+Date.now();
+    newData.id = type[0]+'_'+Date.now();
     items.push(newData);
   }
-  ls(type,items);
   closeModal();
-  renderList(type);
-  renderDashboard();
-  toast(editingId?'Item updated successfully!':'Item added successfully!','success');
-}
+  const ok = await fbSave(collKey, items);
+  if(ok){
+    renderList(collKey);
+    renderDashboard();
+    toast(editingId?'Item updated — live on all devices!':'Item added — live on all devices!','success');
+  }
+};
 
-function collectForm(type) {
-  const v=id=>{const el=document.getElementById(id);return el?el.value.trim():'';}
-  switch(type) {
-    case 'project':{const t=v('mf-title');if(!t){toast('Title is required','error');return null;}return{title:t,category:v('mf-category'),desc:v('mf-desc'),image:v('mf-image')};}
-    case 'service':{const n=v('mf-name');if(!n){toast('Name is required','error');return null;}return{name:n,icon:v('mf-icon')||'fa-star',desc:v('mf-desc')};}
-    case 'team':{const n=v('mf-name');if(!n){toast('Name is required','error');return null;}return{name:n,role:v('mf-role'),bio:v('mf-bio'),image:v('mf-image')};}
-    case 'blog':{const t=v('mf-title');if(!t){toast('Title is required','error');return null;}return{title:t,category:v('mf-category'),date:v('mf-date'),excerpt:v('mf-excerpt'),image:v('mf-image')};}
-    case 'testimonial':{const a=v('mf-author'),tx=v('mf-text');if(!a||!tx){toast('Name and text are required','error');return null;}const s=document.getElementById('mf-stars');return{author:a,role:v('mf-role'),text:tx,stars:s?parseInt(s.value):5};}
+function collectForm(type){
+  const v=function(id){ const el=document.getElementById(id); return el?el.value.trim():''; };
+  switch(type){
+    case 'project': { const t=v('mf-title'); if(!t){toast('Title is required','error');return null;} return {title:t,category:v('mf-category'),desc:v('mf-desc'),image:v('mf-image')}; }
+    case 'service': { const n=v('mf-name'); if(!n){toast('Name is required','error');return null;} return {name:n,icon:v('mf-icon')||'fa-star',desc:v('mf-desc')}; }
+    case 'team':    { const n=v('mf-name'); if(!n){toast('Name is required','error');return null;} return {name:n,role:v('mf-role'),bio:v('mf-bio'),image:v('mf-image')}; }
+    case 'blog':    { const t=v('mf-title'); if(!t){toast('Title is required','error');return null;} return {title:t,category:v('mf-category'),date:v('mf-date'),excerpt:v('mf-excerpt'),image:v('mf-image')}; }
+    case 'testimonial': { const a=v('mf-author'),tx=v('mf-text'); if(!a||!tx){toast('Name and text are required','error');return null;} const s=document.getElementById('mf-stars'); return {author:a,role:v('mf-role'),text:tx,stars:s?parseInt(s.value):5}; }
   }
   return null;
 }
 
-/* ═══ DELETE ════════════════════════════════════════════════ */
-function confirmDelete(type,id,label) {
-  document.getElementById('confirm-msg').textContent=`Delete "${label}"? This cannot be undone.`;
+/* ═══ DELETE ═══ */
+window.confirmDelete = function(type, id, label) {
+  document.getElementById('confirm-msg').textContent = 'Delete "'+label+'"? This cannot be undone.';
   document.getElementById('confirm-bg').classList.add('open');
-  document.getElementById('confirm-ok').onclick=()=>{
-    const items=getData(type).filter(i=>i.id!==id);
-    ls(type,items);
+  document.getElementById('confirm-ok').onclick = async function() {
+    const collKey = type==='testimonial'?'testimonials':type+'s';
+    const items = getData(collKey).filter(function(i){ return i.id!==id; });
     closeConfirm();
-    renderList(type);
-    renderDashboard();
-    toast('Item deleted.','info');
+    const ok = await fbSave(collKey, items);
+    if(ok){
+      renderList(collKey);
+      renderDashboard();
+      toast('Item deleted — updated on all devices.','info');
+    }
   };
-}
-function closeConfirm(){document.getElementById('confirm-bg').classList.remove('open');}
+};
+window.closeConfirm = function(){ document.getElementById('confirm-bg').classList.remove('open'); };
 
-/* ═══ SETTINGS ══════════════════════════════════════════════ */
+/* ═══ SETTINGS ═══ */
 const SETTINGS_MAP = {
-  'st-heroEyebrow':'heroEyebrow','st-heroTitle':'heroTitle','st-heroTitleEm':'heroTitleEm','st-heroSub':'heroSub',
-  'st-heroBg':'heroBg','st-phone':'phone','st-email':'email','st-whatsapp':'whatsapp',
-  'st-location':'location','st-footerAbout':'footerAbout','st-aboutImg':'aboutImg',
-  'st-instagram':'instagram','st-facebook':'facebook','st-tiktok':'tiktok','st-pinterest':'pinterest'
+  'st-heroEyebrow':'heroEyebrow','st-heroTitle':'heroTitle','st-heroTitleEm':'heroTitleEm',
+  'st-heroSub':'heroSub','st-heroBg':'heroBg','st-phone':'phone','st-email':'email',
+  'st-whatsapp':'whatsapp','st-location':'location','st-footerAbout':'footerAbout',
+  'st-aboutImg':'aboutImg','st-instagram':'instagram','st-facebook':'facebook',
+  'st-tiktok':'tiktok','st-pinterest':'pinterest'
 };
 
 function loadSettingsForm() {
-  const s=ls('settings')||{...DEF.settings};
-  Object.entries(SETTINGS_MAP).forEach(([elId,key])=>{
+  const s = getData('settings');
+  Object.entries(SETTINGS_MAP).forEach(function([elId,key]){
     const el=document.getElementById(elId);
     if(el&&s[key]!==undefined) el.value=s[key];
   });
-  // Previews
-  [['st-heroBg','hero-preview'],['st-aboutImg','about-preview']].forEach(([inp,prev])=>{
+  [['st-heroBg','hero-preview'],['st-aboutImg','about-preview']].forEach(function([inp,prev]){
     const el=document.getElementById(inp),pr=document.getElementById(prev);
     if(el&&pr){
       if(el.value){pr.src=el.value;pr.style.display='block';}
-      el.addEventListener('input',()=>{if(el.value){pr.src=el.value;pr.style.display='block';}else{pr.style.display='none';}});
+      el.addEventListener('input',function(){ if(el.value){pr.src=el.value;pr.style.display='block';}else{pr.style.display='none';} });
     }
   });
 }
 
-function saveSettings() {
-  const s=ls('settings')||{...DEF.settings};
-  Object.entries(SETTINGS_MAP).forEach(([elId,key])=>{
-    const el=document.getElementById(elId);if(el) s[key]=el.value;
+window.saveSettings = async function() {
+  const s = Object.assign({}, getData('settings'));
+  Object.entries(SETTINGS_MAP).forEach(function([elId,key]){
+    const el=document.getElementById(elId);
+    if(el) s[key]=el.value;
   });
-  ls('settings',s);
-  document.querySelectorAll('.save-ok').forEach(el=>{el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500);});
-  toast('Settings saved! Refresh the main site to see changes.','success');
-}
+  const ok = await fbSave('settings', s);
+  if(ok){
+    document.querySelectorAll('.save-ok').forEach(function(el){ el.classList.add('show'); setTimeout(function(){ el.classList.remove('show'); },2500); });
+    toast('Settings saved — live on all devices!','success');
+  }
+};
 
-/* ═══ IMAGE UPLOAD ══════════════════════════════════════════ */
-function handleImgUpload(input, urlFieldId, previewId) {
+/* ═══ IMAGE UPLOAD ═══ */
+window.handleImgUpload = function(input, urlFieldId, previewId) {
   const file=input.files[0]; if(!file) return;
   if(!file.type.startsWith('image/')){toast('Please upload an image file.','error');return;}
+  if(file.size > 900*1024){toast('Image must be under 900KB to store in Firestore. Please use an image URL instead.','error');return;}
   const reader=new FileReader();
-  reader.onload=e=>{
+  reader.onload=function(e){
     const url=e.target.result;
     const uf=document.getElementById(urlFieldId),pv=document.getElementById(previewId);
     if(uf) uf.value=url;
     if(pv){pv.src=url;pv.style.display='block';}
   };
   reader.readAsDataURL(file);
-}
+};
 
-/* ═══ TOAST ═════════════════════════════════════════════════ */
-function toast(msg,type='info') {
+/* ═══ TOAST ═══ */
+function toast(msg, type='info') {
   const t=document.getElementById('toast');
   const el=document.createElement('div');
-  el.className=`toast-msg ${type}`;
+  el.className='toast-msg '+type;
   const ico=type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle';
-  el.innerHTML=`<i class="fas ${ico}"></i> ${msg}`;
+  el.innerHTML='<i class="fas '+ico+'"></i> '+msg;
   t.appendChild(el);
-  setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(8px)';el.style.transition='all .3s';setTimeout(()=>el.remove(),350);},3000);
+  setTimeout(function(){ el.style.opacity='0'; el.style.transform='translateY(8px)'; el.style.transition='all .3s'; setTimeout(function(){ el.remove(); },350); },3200);
 }
+window.toast = toast;
 
-/* ── Close on backdrop ── */
-document.getElementById('item-modal').addEventListener('click',e=>{if(e.target===document.getElementById('item-modal'))closeModal();});
-document.getElementById('confirm-bg').addEventListener('click',e=>{if(e.target===document.getElementById('confirm-bg'))closeConfirm();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeConfirm();}});
+/* ── Modal backdrops ── */
+document.getElementById('item-modal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+document.getElementById('confirm-bg').addEventListener('click',function(e){ if(e.target===this) closeConfirm(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){closeModal();closeConfirm();} });
 </script>
 </body>
 </html>
