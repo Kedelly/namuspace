@@ -83,7 +83,7 @@ p{color:var(--muted)}
 .hs-n{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--gold);line-height:1}
 .hs-l{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,220,200,.55);margin-top:.25rem}
 /* ABOUT */
-#about{background:var(--white)}
+#about{background:var(--sand)}
 .about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .about-img-col{position:relative}
 .about-frame{position:relative;border-radius:4px;overflow:hidden}
@@ -100,19 +100,114 @@ p{color:var(--muted)}
 .av-ic{color:var(--tc);font-size:.9rem;margin-top:.1rem;flex-shrink:0}
 .av-t{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tc-deep);margin-bottom:.12rem}
 .av-s{font-size:.77rem;color:var(--muted);line-height:1.55}
+/* MISSION & VISION (new) */
+.mission-vision{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.mission-card,.vision-card{background:var(--cream-w);padding:1.5rem;border-radius:0 3px 3px 0;transition:all var(--t)}
+.mission-card{border-left:4px solid var(--tc)}
+.vision-card{border-left:4px solid var(--aberdare)}
+.mission-card h4,.vision-card h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;color:var(--tc-deep)}
+.mission-card p,.vision-card p{font-size:0.9rem;color:var(--muted);line-height:1.6}
 /* SERVICES */
-#services{background:var(--cream-w);position:relative;overflow:hidden}
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;position:relative;z-index:1}
-.svc-card{background:var(--white);padding:2.5rem 2rem 2rem;border-radius:4px;border:1px solid var(--sand-l);transition:all var(--t) var(--ease);position:relative;overflow:hidden}
-.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--tc),var(--gold),var(--aberdare));opacity:0;transition:opacity .35s}
-.svc-card:hover::before{opacity:1} .svc-card:hover{box-shadow:0 16px 48px rgba(74,60,49,.12);transform:translateY(-5px)}
-.svc-ic{width:52px;height:52px;background:var(--cream-w);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.1rem;color:var(--tc);transition:all var(--t)}
-.svc-card:hover .svc-ic{background:var(--tc);color:var(--white)}
-.svc-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:500;color:var(--tc-deep);margin-bottom:.65rem}
-.svc-desc{font-size:.87rem;line-height:1.8;color:var(--muted)}
-.skel{border-radius:4px;background:linear-gradient(90deg,var(--sand-l) 25%,var(--sand) 50%,var(--sand-l) 75%);background-size:200% 100%;animation:shim 1.6s infinite}
-.skel-d{border-radius:4px;background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);background-size:200% 100%;animation:shim 1.6s infinite}
-@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+#services {
+  background: var(--);
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.svc-card {
+  background: var(--sand);
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 4px;
+  border: 1px solid var(--sand-l);
+  transition: all var(--t) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--tc), var(--gold), var(--aberdare));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.svc-card:hover::before {
+  opacity: 1;
+}
+
+.svc-card:hover {
+  box-shadow: 0 16px 48px rgba(74, 60, 49, 0.12);
+  transform: translateY(-5px);
+}
+
+.svc-ic {
+  width: 52px;
+  height: 52px;
+  background: var(--cream-w);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--tc);
+  transition: all var(--t);
+}
+
+.svc-card:hover .svc-ic {
+  background: var(--tc);
+  color: var(--white);
+}
+
+.svc-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 0.65rem;
+}
+
+.svc-desc {
+  font-size: 0.87rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.skel {
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--sand-l) 25%, var(--sand) 50%, var(--sand-l) 75%);
+  background-size: 200% 100%;
+  animation: shim 1.6s infinite;
+}
+
+.skel-d {
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shim 1.6s infinite;
+}
+
+@keyframes shim {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
 /* MATERIALS */
 #materials{background:var(--tc-deep);padding:4rem 10vw;position:relative;overflow:hidden}
 #materials::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 12px)}
@@ -124,17 +219,30 @@ p{color:var(--muted)}
 .mat-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(74,60,49,.88) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:1rem}
 .mat-nm{font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:var(--white)}
 .mat-og{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.2rem}
-/* PORTFOLIO */
-#portfolio{background:var(--twilight);padding:var(--sp) 10vw;position:relative}
+/* PORTFOLIO (UPDATED) */
+#portfolio{background:var(--tc);padding:var(--sp) 10vw;position:relative}
 #portfolio::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");background-size:40px 40px}
 #portfolio .eyebrow{color:var(--gold)} #portfolio .sec-title{color:var(--white)} #portfolio .sec-title em{color:#E8B87A}
 .port-filters{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem;position:relative;z-index:1}
 .pf-btn{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.42rem 1.1rem;border:1px solid rgba(232,220,200,.22);color:rgba(232,220,200,.58);border-radius:2px;cursor:pointer;transition:all var(--t);background:none}
 .pf-btn:hover,.pf-btn.active{background:var(--tc);color:var(--white);border-color:var(--tc)}
 .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;position:relative;z-index:1}
-.port-card{border-radius:4px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer}
-.port-card:first-child{grid-row:span 2;aspect-ratio:auto}
-.port-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s var(--ease)}
+.port-card {
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: var(--tc-deep);
+}
+.port-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.65s var(--ease);
+}
+.port-card:first-child {
+  grid-row: span 2;
+}
 .port-card:hover .port-img{transform:scale(1.06)}
 .port-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,62,80,.9) 0%,rgba(74,60,49,.25) 55%,transparent 100%);opacity:0;transition:opacity var(--t);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem}
 .port-card:hover .port-ov{opacity:1}
@@ -145,18 +253,43 @@ p{color:var(--muted)}
 .port-inq:hover{background:var(--gold);color:var(--tc-deep)}
 .port-empty{color:rgba(232,220,200,.4);text-align:center;padding:3rem;grid-column:1/-1}
 /* TEAM */
-#team{background:var(--parch)}
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2rem}
-.team-card{background:var(--white);border-radius:4px;overflow:hidden;border:1px solid var(--sand-l);transition:all var(--t)}
-.team-card:hover{box-shadow:0 14px 40px rgba(74,60,49,.12);transform:translateY(-4px)}
-.team-img-w{position:relative;overflow:hidden}
-.team-img{width:100%;height:300px;object-fit:cover;object-position:top;display:block;transition:transform .7s var(--ease)}
-.team-card:hover .team-img{transform:scale(1.04)}
-.team-acc{position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--tc),var(--gold),var(--aberdare))}
-.team-info{padding:1.5rem 1.4rem}
-.team-nm{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--tc-deep);margin-bottom:.25rem}
-.team-rl{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--tc);margin-bottom:.5rem}
-.team-bio{font-size:.82rem;color:var(--muted);line-height:1.65}
+.team-card {
+  text-align: left;
+  transition: var(--transition);
+}
+
+.team-card__photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--space-lg);
+  border: 4px solid var(--savannah-pale);
+  box-shadow: var(--shadow-sm);
+  display: block;
+  background: linear-gradient(135deg, var(--savannah-pale), var(--savannah-light));
+  overflow: hidden;
+}
+
+.team-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-card__photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: rgba(125, 93, 75, 0.3);
+}
+
+.team-card__name { font-size: 1.2rem; margin-bottom: var(--space-xs); }
+.team-card__role { font-size: 0.78rem; color: var(--terracotta); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-md); }
+.team-card__bio { font-size: 0.9rem; max-width: 300px; margin: 0 auto; }
 /* TESTIMONIALS */
 #testimonials{background:var(--tc-deep);padding:var(--sp) 10vw;position:relative;overflow:hidden}
 #testimonials::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(249,168,37,.07) 1.5px,transparent 1.5px);background-size:30px 30px}
@@ -257,7 +390,7 @@ footer::after{content:'';position:absolute;inset:0;pointer-events:none;backgroun
 .ld-prog{height:100%;width:0;background:linear-gradient(90deg,var(--tc),var(--gold));border-radius:2px;animation:ldP 1.2s ease forwards}
 @keyframes ldP{to{width:100%}}
 /* RESPONSIVE */
-@media(max-width:1100px){.port-grid{grid-template-columns:repeat(2,1fr)}.port-card:first-child{grid-row:auto;aspect-ratio:3/4}.ftop{grid-template-columns:1fr 1fr}.mat-row{flex-wrap:wrap}.mat-item{min-width:calc(50% - .75rem)}}
+@media(max-width:1100px){.port-grid{grid-template-columns:repeat(2,1fr)}.port-card:first-child{grid-row:auto}.ftop{grid-template-columns:1fr 1fr}.mat-row{flex-wrap:wrap}.mat-item{min-width:calc(50% - .75rem)}}
 @media(max-width:900px){.about-wrap{grid-template-columns:1fr;gap:3rem}.about-badge{bottom:.5rem;right:.5rem;width:90px;height:90px}.about-badge .n{font-size:1.9rem}.contact-wrap{grid-template-columns:1fr;gap:3rem}.f2{grid-template-columns:1fr}.hero-stats{display:none}.about-vals{grid-template-columns:1fr}}
 @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.port-grid{grid-template-columns:1fr}.ftop{grid-template-columns:1fr;padding:3rem 6vw 2rem}.sec{padding:var(--sp) 6vw}#cta-bar .cta-t{display:none}.mat-item{min-width:100%}}
 @media(max-width:480px){.hero-btns{flex-direction:column}.btn-p,.btn-o{width:100%;justify-content:center}#wa-btn{bottom:76px;right:1rem}.inq-box{padding:2rem 1.5rem}}
@@ -325,7 +458,7 @@ footer::after{content:'';position:absolute;inset:0;pointer-events:none;backgroun
 
 <hr class="kanga-div">
 
-<!-- ABOUT -->
+<!-- ABOUT (with Mission & Vision) -->
 <section id="about" class="sec">
   <div class="about-wrap">
     <div class="about-img-col sr">
@@ -336,8 +469,7 @@ footer::after{content:'';position:absolute;inset:0;pointer-events:none;backgroun
       <span class="eyebrow">About Namu Spaces</span>
       <h2 class="sec-title">Where Nairobi&apos;s Soul<br>Meets <em>Timeless Design</em></h2>
       <div id="about-text">
-        <p>Namu Spaces is a premier interior design studio born from the heart of Nairobi. We believe great design is a conversation between a space and the people who inhabit it &mdash; blending warmth, culture, and contemporary vision into every project.</p>
-        <p>Our multidisciplinary team draws inspiration from East Africa&apos;s rich textures, colours, and craftsmanship, weaving them seamlessly with global design sensibilities.</p>
+        <p>Namu Spaces is a Kenyan Interior design studio focused on creating thoughtful functional and beautiful interiors. We design spaces that balance aesthetics and practically ensuring every room feels calm, intentional and truly lived in. From concept development to space planning and styling, we work closely with our clients to bring their vision to life while respecting their budget and lifestyle. At Namu Spaces, we believe that good design is not about creating trends, it is about creating spaces that feel like home.</p>
       </div>
       <div class="about-vals">
         <div class="av"><div class="av-ic"><i class="fas fa-leaf"></i></div><div><div class="av-t">Locally Inspired</div><div class="av-s">Rooted in Kenyan culture and landscape</div></div></div>
@@ -345,11 +477,22 @@ footer::after{content:'';position:absolute;inset:0;pointer-events:none;backgroun
         <div class="av"><div class="av-ic"><i class="fas fa-seedling"></i></div><div><div class="av-t">Sustainably Conscious</div><div class="av-s">Supporting Kenyan artisans and materials</div></div></div>
         <div class="av"><div class="av-ic"><i class="fas fa-eye"></i></div><div><div class="av-t">Detail Obsessed</div><div class="av-s">Excellence in every finish and texture</div></div></div>
       </div>
+      <!-- New Mission & Vision section -->
+      <div class="mission-vision">
+        <div class="mission-card">
+          <h4>Our Mission</h4>
+          <p>To create functional, calm, and intentional interiors that reflect each client's lifestyle and personality.</p>
+        </div>
+        <div class="vision-card">
+          <h4>Our Vision</h4>
+          <p>To be a trusted interior design studio in Kenya, transforming everyday spaces into beautiful, practical homes.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES (updated list) -->
 <section id="services" class="sec maasai-bg">
   <div class="sec-hd sr"><span class="eyebrow">What We Offer</span><h2 class="sec-title">Our <em>Services</em></h2></div>
   <div class="svc-grid" id="svc-grid">
@@ -375,7 +518,7 @@ footer::after{content:'';position:absolute;inset:0;pointer-events:none;backgroun
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- PORTFOLIO (unchanged) -->
 <section id="portfolio">
   <div class="sec" style="padding-bottom:0">
     <div class="sec-hd sr"><span class="eyebrow">Our Work</span><h2 class="sec-title">Selected <em>Projects</em></h2></div>
@@ -533,11 +676,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 
-/* ── Default fallback data (shown if Firebase is empty) ── */
+/* ── Default fallback data (updated services list) ── */
 const DEFAULTS = {
   settings:{
-    phone:'+254 712 345 678', email:'hello@namuspaces.co.ke',
-    location:'The Mirage, Westlands, Nairobi, Kenya', whatsapp:'254712345678',
+    phone:'+254 712 345 678', email:'wabombamedina5@gmail.com',
+    location:'The Mirage, Westlands, Nairobi, Kenya', whatsapp:'254796975533',
     instagram:'https://instagram.com/namuspaces', facebook:'https://facebook.com/namuspaces',
     tiktok:'https://tiktok.com/@namuspaces', pinterest:'https://pinterest.com/namuspaces',
     heroTitle:'Designing Spaces,', heroTitleEm:'Inspiring Lives',
@@ -547,12 +690,11 @@ const DEFAULTS = {
     footerAbout:"Nairobi's premier interior design studio, crafting spaces that balance beauty, culture, and function since 2014."
   },
   services:[
-    {id:'s1',icon:'fa-home',name:'Residential Design',desc:'Transforming houses into warm, personalised homes that reflect your lifestyle, taste, and Kenyan character.'},
-    {id:'s2',icon:'fa-building',name:'Commercial Design',desc:'Creating productive, brand-aligned workspaces — offices, retail outlets, restaurants, and hospitality venues.'},
-    {id:'s3',icon:'fa-drafting-compass',name:'Space Planning',desc:'Intelligent layouts that maximise flow, function, and the full potential of every square metre.'},
-    {id:'s4',icon:'fa-couch',name:'Custom Furniture',desc:"Bespoke pieces crafted by Kenyan artisans — furniture that tells a story and fits perfectly in your space."},
-    {id:'s5',icon:'fa-palette',name:'Colour Consulting',desc:"Expert colour strategy inspired by Kenya's landscape to set mood and bring harmony to every room."},
-    {id:'s6',icon:'fa-lightbulb',name:'Lighting Design',desc:"Layered lighting schemes that enhance architecture and how Kenya's natural light transforms a space."}
+    {id:'s1',icon:'fa-comments',name:'Interior Design Consultation',desc:'Expert guidance to define your style, needs, and budget – the first step to a space that truly feels like yours.'},
+    {id:'s2',icon:'fa-draw-polygon',name:'Space Planning and Layout',desc:'Optimising flow and function with intelligent layouts tailored to how you live or work.'},
+    {id:'s3',icon:'fa-paint-brush',name:'Mood Boards and Design Concepts',desc:'Visual storytelling that brings your vision to life – colours, materials, and textures curated just for you.'},
+    {id:'s4',icon:'fa-cube',name:'3D Render Designs',desc:'Realistic 3D visualisations so you can see and feel your space before a single brushstroke.'},
+    {id:'s5',icon:'fa-couch',name:'Interior Styling',desc:'Finishing touches – from furniture arrangement to accessories – that make a room sing.'}
   ],
   projects:[
     {id:'p1',title:'Kilimani Penthouse',category:'Residential',desc:'A luminous 4-bed penthouse fusing Lamu craftsmanship with modern minimalism.',image:'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80'},
@@ -562,9 +704,7 @@ const DEFAULTS = {
     {id:'p5',title:'Lavington Study',category:'Custom Furniture',desc:'Bespoke olive-wood bookcase and desk suite for a home library.',image:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80'}
   ],
   team:[
-    {id:'t1',name:'Amara Njeri',role:'Principal Designer',bio:'15 years crafting spaces across East Africa with a passion for authentic Kenyan materials.',image:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80'},
-    {id:'t2',name:'David Kamau',role:'Commercial Lead',bio:'Specialist in high-end commercial interiors bridging Kenyan heritage with global trends.',image:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80'},
-    {id:'t3',name:'Siti Omondi',role:'Furniture & Craft',bio:"Connecting Lamu artisans, Kitengela glass-workers, and Nairobi clients with beautiful results.",image:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80'}
+    {id:'t1',name:'Medina Wabomba',role:'Founder & Lead Designer',bio:'5 years crafting spaces across East Africa with a passion for authentic Kenyan materials.',image:'https://69a5fa9b581800b707fb4b6e.imgix.net/images/617520439_18071976080614922_7808922703831373612_n.jpg?w=150&h=150'},
   ],
   testimonials:[
     {id:'r1',text:'Namu Spaces completely transformed our apartment. Every detail felt personal and intentional — deeply Kenyan yet completely contemporary.',author:'Grace M.',role:'Kilimani Resident',stars:5},
@@ -747,4 +887,8 @@ document.addEventListener('keydown',function(ev){ if(ev.key==='Escape') closeInq
 window.addEventListener('scroll',function(){
   var sy=window.scrollY;
   document.getElementById('nav').classList.toggle('scrolled',sy>50);
-  document.getElementById('cta-bar').clas
+  document.getElementById('cta-bar').classList.toggle('visible',sy>300);
+});
+</script>
+</body>
+</html>
