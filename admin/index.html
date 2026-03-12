@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin Panel — Namu Spaces</title>
+  <style>
+    /* ── Admin Design System ── */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    :root {
+      --cream:     #F5F0E8;
+      --sand:      #E8DCC8;
+      --clay:      #C4A882;
+      --terracotta:#B5714A;
+      --bark:      #7A5C3E;
+      --forest:    #3D5247;
+      --charcoal:  #2A2A2A;
+      --ink:       #1A1A1A;
+      --sidebar-w: 260px;
+      --top-h:     64px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'DM Sans', sans-serif; background: #F7F5F2; color: var(--charcoal); }
+    h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Login Screen ── */
+    #login-screen {
+      position: fixed; inset: 0;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    #login-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .login-box {
+      background: #F7F5F2;
+      width: 420px;
+      max-width: calc(100vw - 40px);
+      padding: 56px 48px;
+      text-align: center;
+    }
+
+    .login-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .login-sub {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 40px;
+    }
+
+    .login-field {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .login-field label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .login-field input {
+      width: 100%;
+      padding: 14px 0;
+      border: none;
+      border-bottom: 1px solid var(--sand);
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .login-field input:focus { border-bottom-color: var(--terracotta); }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--forest);
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: 8px;
+      transition: background 0.3s;
+    }
+    .login-btn:hover { background: var(--bark); }
+
+    .login-error {
+      color: #c0392b;
+      font-size: 13px;
+      margin-top: 16px;
+      display: none;
+    }
+    .login-error.show { display: block; }
+
+    .login-security {
+      margin-top: 32px;
+      font-size: 11px;
+      color: var(--clay);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ── App Shell ── */
+    #app { display: none; min-height: 100vh; }
+    #app.visible { display: flex; }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      z-index: 100;
+      transition: transform 0.3s;
+    }
+
+    .sidebar-logo {
+      padding: 28px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-logo .brand { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--cream); }
+    .sidebar-logo .sub { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-top: 2px; }
+
+    .sidebar-nav { flex: 1; padding: 20px 0; overflow-y: auto; }
+
+    .nav-section-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      padding: 16px 24px 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 24px;
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.2s;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { color: var(--cream); background: rgba(255,255,255,0.04); }
+    .nav-item.active { color: var(--cream); background: rgba(255,255,255,0.06); border-left-color: var(--terracotta); }
+    .nav-item svg { flex-shrink: 0; opacity: 0.7; }
+    .nav-item.active svg { opacity: 1; }
+
+    .sidebar-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-user { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+    .logout-btn {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .logout-btn:hover { color: #e74c3c; }
+
+    /* ── Main Content ── */
+    .main-content {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Top Bar ── */
+    .topbar {
+      height: var(--top-h);
+      background: white;
+      border-bottom: 1px solid #EDEBE8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+
+    .view-site-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--cream);
+      color: var(--bark);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .view-site-btn:hover { background: var(--sand); }
+
+    /* ── Content Area ── */
+    .content-area {
+      flex: 1;
+      padding: 36px 40px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* ── Panels ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Dashboard ── */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .dash-card {
+      background: white;
+      padding: 28px;
+      border-top: 3px solid var(--sand);
+      transition: border-color 0.3s;
+    }
+    .dash-card:hover { border-top-color: var(--terracotta); }
+
+    .dash-card-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .dash-card-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .quick-actions {
+      background: white;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .quick-actions h3 {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .action-btn:hover { background: var(--terracotta); color: white; }
+
+    /* ── Section Headers ── */
+    .section-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .section-bar h2 {
+      font-size: 22px;
+      color: var(--ink);
+    }
+
+    /* ── Buttons ── */
+    .btn-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: var(--forest);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-add:hover { background: var(--bark); }
+
+    .btn-save {
+      padding: 10px 24px;
+      background: var(--terracotta);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-save:hover { background: var(--bark); }
+
+    .btn-edit {
+      padding: 6px 14px;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 12px;
+      border: 1px solid var(--sand);
+      transition: all 0.2s;
+    }
+    .btn-edit:hover { background: var(--forest); color: white; border-color: var(--forest); }
+
+    .btn-delete {
+      padding: 6px 14px;
+      background: transparent;
+      color: #c0392b;
+      font-size: 12px;
+      border: 1px solid #f0c5c0;
+      transition: all 0.2s;
+    }
+    .btn-delete:hover { background: #c0392b; color: white; border-color: #c0392b; }
+
+    /* ── Table ── */
+    .data-table {
+      width: 100%;
+      background: white;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      text-align: left;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--clay);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--sand);
+      font-weight: 500;
+      background: var(--cream);
+    }
+
+    .data-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #F0EDE8;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: #FDFAF7; }
+
+    .td-actions { display: flex; gap: 8px; }
+
+    /* ── Forms ── */
+    .form-panel {
+      background: white;
+      padding: 36px;
+      margin-top: 24px;
+    }
+
+    .form-panel h3 {
+      font-size: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--sand);
+      color: var(--ink);
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .form-full { grid-column: span 2; }
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+    .form-group label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bark);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px;
+      border: 1px solid var(--sand);
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--terracotta); background: white; }
+
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .form-actions { display: flex; gap: 12px; margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--sand); }
+
+    .btn-cancel {
+      padding: 10px 24px;
+      background: var(--cream);
+      color: var(--bark);
+      font-size: 13px;
+      border: 1px solid var(--sand);
+      transition: all 0.2s;
+    }
+    .btn-cancel:hover { background: var(--sand); }
+
+    /* Image upload */
+    .image-upload-area {
+      border: 2px dashed var(--sand);
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+    }
+    .image-upload-area:hover { border-color: var(--terracotta); background: var(--cream); }
+    .image-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-icon { font-size: 32px; margin-bottom: 8px; }
+    .upload-text { font-size: 13px; color: var(--bark); }
+    .upload-hint { font-size: 11px; color: var(--clay); margin-top: 4px; }
+    .image-preview-wrap { margin-top: 16px; }
+    .image-preview-wrap img { max-height: 160px; width: auto; margin: 0 auto; border: 1px solid var(--sand); }
+
+    /* Toggle */
+    .toggle-wrap { display: flex; align-items: center; gap: 12px; }
+    .toggle {
+      width: 44px; height: 24px;
+      background: var(--sand);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle.on { background: var(--forest); }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    .toggle.on::after { transform: translateX(20px); }
+    .toggle-label { font-size: 13px; color: var(--charcoal); }
+
+    /* ── Settings ── */
+    .settings-section {
+      background: white;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .settings-section h3 {
+      font-size: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--sand);
+    }
+
+    /* ── Toast ── */
+    .admin-toast {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      background: var(--forest);
+      color: white;
+      padding: 16px 24px;
+      font-size: 14px;
+      z-index: 9999;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.4s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .admin-toast.show { transform: translateY(0); opacity: 1; }
+    .admin-toast.error { background: #c0392b; }
+
+    /* ── Confirm Dialog ── */
+    .confirm-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 8000;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .confirm-overlay.open { opacity: 1; pointer-events: all; }
+
+    .confirm-box {
+      background: white;
+      padding: 48px;
+      max-width: 440px;
+      width: calc(100% - 40px);
+      text-align: center;
+    }
+    .confirm-box h4 { font-size: 22px; margin-bottom: 12px; }
+    .confirm-box p { font-size: 14px; color: var(--bark); margin-bottom: 32px; }
+    .confirm-actions { display: flex; gap: 12px; justify-content: center; }
+
+    .btn-confirm-delete { padding: 12px 28px; background: #c0392b; color: white; font-size: 13px; }
+    .btn-confirm-delete:hover { background: #a93226; }
+    .btn-confirm-cancel { padding: 12px 28px; background: var(--cream); color: var(--bark); font-size: 13px; border: 1px solid var(--sand); }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .badge-residential { background: #EAF4EA; color: #2d6a4f; }
+    .badge-commercial   { background: #EAF0F4; color: #2d4f6a; }
+    .badge-office       { background: #F4EAF0; color: #6a2d5a; }
+
+    /* ── Empty State ── */
+    .empty-state {
+      background: white;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+    .empty-title { font-size: 20px; margin-bottom: 8px; color: var(--ink); }
+    .empty-desc { font-size: 14px; color: var(--bark); }
+
+    /* ── Password Change ── */
+    .security-notice {
+      background: #FFF8F0;
+      border-left: 3px solid var(--terracotta);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--bark);
+      margin-bottom: 24px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .dash-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-full { grid-column: span 1; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; }
+      .content-area { padding: 24px 20px; }
+      .topbar { padding: 0 20px; }
+      .dash-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Login Screen ────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Namu Spaces</div>
+    <div class="login-sub">Admin Dashboard</div>
+    <form id="login-form">
+      <div class="login-field">
+        <label>Username</label>
+        <input type="text" id="login-user" autocomplete="username" placeholder="Enter username" required>
+      </div>
+      <div class="login-field">
+        <label>Password</label>
+        <input type="password" id="login-pass" autocomplete="current-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="login-btn">Sign In to Dashboard</button>
+      <div class="login-error" id="login-error">Incorrect credentials. Please try again.</div>
+    </form>
+    <div class="login-security">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Secured admin area — not publicly accessible
+    </div>
+  </div>
+</div>
+
+<!-- ── App Shell ───────────────────────────────────────────── -->
+<div id="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="brand">Namu Spaces</div>
+      <div class="sub">Content Management</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <div class="nav-item active" data-panel="dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+
+      <div class="nav-section-label">Content</div>
+      <div class="nav-item" data-panel="projects">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Projects
+      </div>
+      <div class="nav-item" data-panel="services">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        Services
+      </div>
+      <div class="nav-item" data-panel="blog">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Blog Posts
+      </div>
+      <div class="nav-item" data-panel="testimonials">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Testimonials
+      </div>
+      <div class="nav-item" data-panel="team">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Team Members
+      </div>
+
+      <div class="nav-section-label">Configuration</div>
+      <div class="nav-item" data-panel="settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Site Settings
+      </div>
+      <div class="nav-item" data-panel="security">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Security
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user">Logged in as Admin</div>
+      <button class="logout-btn" id="logout-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="topbar">
+      <h1 class="topbar-title" id="topbar-title">Dashboard</h1>
+      <div class="topbar-right">
+        <a href="../index.html" target="_blank" class="view-site-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View Site
+        </a>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ── Dashboard Panel ── -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="dash-grid" id="dash-stats"></div>
+        <div class="quick-actions">
+          <h3>Quick Actions</h3>
+          <div class="actions-grid">
+            <button class="action-btn" data-panel="projects">+ Add Project</button>
+            <button class="action-btn" data-panel="blog">+ Write Blog Post</button>
+            <button class="action-btn" data-panel="testimonials">+ Add Testimonial</button>
+            <button class="action-btn" data-panel="services">+ Edit Services</button>
+            <button class="action-btn" data-panel="settings">⚙ Site Settings</button>
+            <button class="action-btn" data-panel="team">👤 Manage Team</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Projects Panel ── -->
+      <div class="panel" id="panel-projects">
+        <div class="section-bar">
+          <h2>Portfolio Projects</h2>
+          <button class="btn-add" id="btn-add-project">+ Add Project</button>
+        </div>
+        <div id="projects-list"></div>
+        <div class="form-panel" id="project-form-wrap" style="display:none">
+          <h3 id="project-form-title">Add New Project</h3>
+          <form id="project-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Project Title *</label>
+                <input type="text" name="title" required placeholder="e.g. Kilimani Apartment">
+              </div>
+              <div class="form-group">
+                <label>Category *</label>
+                <select name="category" required>
+                  <option value="">Select…</option>
+                  <option value="residential">Residential</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="office">Office</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>Description</label>
+                <textarea name="desc" placeholder="Brief description of the project…"></textarea>
+              </div>
+              <div class="form-group form-full">
+                <label>Project Image</label>
+                <div class="image-upload-area" id="project-img-area">
+                  <input type="file" accept="image/*" id="project-img-input">
+                  <div class="upload-icon">🖼</div>
+                  <div class="upload-text">Click or drag image here</div>
+                  <div class="upload-hint">JPG, PNG, WEBP — Max 5MB</div>
+                </div>
+                <div class="image-preview-wrap" id="project-img-preview"></div>
+              </div>
+              <div class="form-group">
+                <label>Featured on Homepage</label>
+                <div class="toggle-wrap">
+                  <div class="toggle" id="project-featured-toggle"></div>
+                  <span class="toggle-label" id="project-featured-label">No</span>
+                </div>
+                <input type="hidden" name="featured" value="false">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-save">Save Project</button>
+              <button type="button" class="btn-cancel" id="cancel-project">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── Services Panel ── -->
+      <div class="panel" id="panel-services">
+        <div class="section-bar">
+          <h2>Services</h2>
+          <button class="btn-add" id="btn-add-service">+ Add Service</button>
+        </div>
+        <div id="services-list"></div>
+        <div class="form-panel" id="service-form-wrap" style="display:none">
+          <h3 id="service-form-title">Edit Service</h3>
+          <form id="service-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Service Name *</label>
+                <input type="text" name="name" required>
+              </div>
+              <div class="form-group">
+                <label>Price Range *</label>
+                <input type="text" name="price" placeholder="e.g. From KES 8,000" required>
+              </div>
+              <div class="form-group form-full">
+                <label>Description *</label>
+                <textarea name="desc" required></textarea>
+              </div>
+              <div class="form-group form-full">
+                <label>Features (one per line)</label>
+                <textarea name="features" rows="5" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-save">Save Service</button>
+              <button type="button" class="btn-cancel" id="cancel-service">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── Blog Panel ── -->
+      <div class="panel" id="panel-blog">
+        <div class="section-bar">
+          <h2>Blog Posts</h2>
+          <button class="btn-add" id="btn-add-blog">+ New Post</button>
+        </div>
+        <div id="blog-list"></div>
+        <div class="form-panel" id="blog-form-wrap" style="display:none">
+          <h3 id="blog-form-title">Add Blog Post</h3>
+          <form id="blog-form">
+            <div class="form-grid">
+              <div class="form-group form-full">
+                <label>Post Title *</label>
+                <input type="text" name="title" required>
+              </div>
+              <div class="form-group">
+                <label>Category *</label>
+                <input type="text" name="category" required placeholder="e.g. Tips & Tricks">
+              </div>
+              <div class="form-group">
+                <label>Date</label>
+                <input type="text" name="date" placeholder="e.g. March 5, 2025">
+              </div>
+              <div class="form-group form-full">
+                <label>Excerpt / Summary *</label>
+                <textarea name="excerpt" required placeholder="Short description of the article…"></textarea>
+              </div>
+              <div class="form-group form-full">
+                <label>Featured Image</label>
+                <div class="image-upload-area">
+                  <input type="file" accept="image/*" id="blog-img-input">
+                  <div class="upload-icon">📸</div>
+                  <div class="upload-text">Upload cover image</div>
+                  <div class="upload-hint">JPG, PNG, WEBP — Max 5MB</div>
+                </div>
+                <div class="image-preview-wrap" id="blog-img-preview"></div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-save">Publish Post</button>
+              <button type="button" class="btn-cancel" id="cancel-blog">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── Testimonials Panel ── -->
+      <div class="panel" id="panel-testimonials">
+        <div class="section-bar">
+          <h2>Client Testimonials</h2>
+          <button class="btn-add" id="btn-add-testimonial">+ Add Testimonial</button>
+        </div>
+        <div id="testimonials-list"></div>
+        <div class="form-panel" id="testimonial-form-wrap" style="display:none">
+          <h3 id="testimonial-form-title">Add Testimonial</h3>
+          <form id="testimonial-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Client Name *</label>
+                <input type="text" name="author" required placeholder="e.g. Amina K.">
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" placeholder="e.g. Kilimani, Nairobi">
+              </div>
+              <div class="form-group">
+                <label>Initials (for avatar)</label>
+                <input type="text" name="initials" maxlength="2" placeholder="e.g. AK">
+              </div>
+              <div class="form-group form-full">
+                <label>Testimonial Text *</label>
+                <textarea name="text" required placeholder="What did the client say about working with Namu Spaces?"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-save">Save Testimonial</button>
+              <button type="button" class="btn-cancel" id="cancel-testimonial">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── Team Panel ── -->
+      <div class="panel" id="panel-team">
+        <div class="section-bar">
+          <h2>Team Members</h2>
+          <button class="btn-add" id="btn-add-team">+ Add Member</button>
+        </div>
+        <div id="team-list"></div>
+        <div class="form-panel" id="team-form-wrap" style="display:none">
+          <h3 id="team-form-title">Add Team Member</h3>
+          <form id="team-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" name="name" required>
+              </div>
+              <div class="form-group">
+                <label>Role / Title *</label>
+                <input type="text" name="role" required placeholder="e.g. Lead Designer">
+              </div>
+              <div class="form-group">
+                <label>Initials</label>
+                <input type="text" name="initials" maxlength="2" placeholder="e.g. MW">
+              </div>
+              <div class="form-group form-full">
+                <label>Bio</label>
+                <textarea name="bio" placeholder="Short bio…"></textarea>
+              </div>
+              <div class="form-group form-full">
+                <label>Photo</label>
+                <div class="image-upload-area">
+                  <input type="file" accept="image/*" id="team-img-input">
+                  <div class="upload-icon">👤</div>
+                  <div class="upload-text">Upload team member photo</div>
+                  <div class="upload-hint">Square image recommended</div>
+                </div>
+                <div class="image-preview-wrap" id="team-img-preview"></div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-save">Save Member</button>
+              <button type="button" class="btn-cancel" id="cancel-team">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── Settings Panel ── -->
+      <div class="panel" id="panel-settings">
+        <h2 style="margin-bottom:32px">Site Settings</h2>
+        <form id="settings-form">
+          <div class="settings-section">
+            <h3>General Information</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Studio Name</label>
+                <input type="text" name="name">
+              </div>
+              <div class="form-group">
+                <label>Tagline</label>
+                <input type="text" name="tagline">
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone">
+              </div>
+              <div class="form-group">
+                <label>WhatsApp Number (with country code, no +)</label>
+                <input type="text" name="whatsapp" placeholder="254796975533">
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" name="address">
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>Hero Section</h3>
+            <div class="form-group">
+              <label>Hero Headline</label>
+              <input type="text" name="heroHeadline">
+            </div>
+            <div class="form-group">
+              <label>Hero Subtitle</label>
+              <textarea name="heroSubtitle" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>Stats Bar</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Years of Experience</label>
+                <input type="text" name="yearsExperience" placeholder="5+">
+              </div>
+              <div class="form-group">
+                <label>Projects Completed</label>
+                <input type="text" name="projectsCompleted" placeholder="80+">
+              </div>
+              <div class="form-group">
+                <label>Happy Clients</label>
+                <input type="text" name="happyClients" placeholder="60+">
+              </div>
+              <div class="form-group">
+                <label>Cities Served</label>
+                <input type="text" name="citiesServed" placeholder="3">
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>Social Media Links</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Instagram URL</label>
+                <input type="url" name="instagram">
+              </div>
+              <div class="form-group">
+                <label>TikTok URL</label>
+                <input type="url" name="tiktok">
+              </div>
+              <div class="form-group">
+                <label>Facebook URL</label>
+                <input type="url" name="facebook">
+              </div>
+              <div class="form-group">
+                <label>Pinterest URL</label>
+                <input type="url" name="pinterest">
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 0 0 8px">
+            <button type="submit" class="btn-save">Save All Settings</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ── Security Panel ── -->
+      <div class="panel" id="panel-security">
+        <h2 style="margin-bottom:32px">Security Settings</h2>
+        <div class="settings-section">
+          <h3>Change Admin Password</h3>
+          <div class="security-notice">
+            🔒 Admin credentials are stored locally. Change your password regularly for security.
+          </div>
+          <form id="password-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Current Password *</label>
+                <input type="password" name="currentPass" required autocomplete="current-password">
+              </div>
+              <div style=""></div>
+              <div class="form-group">
+                <label>New Password *</label>
+                <input type="password" name="newPass" required minlength="8" autocomplete="new-password">
+              </div>
+              <div class="form-group">
+                <label>Confirm New Password *</label>
+                <input type="password" name="confirmPass" required autocomplete="new-password">
+              </div>
+            </div>
+            <button type="submit" class="btn-save">Update Password</button>
+          </form>
+        </div>
+        <div class="settings-section">
+          <h3>Change Admin Username</h3>
+          <form id="username-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Current Password (to confirm)</label>
+                <input type="password" name="passForUser" required>
+              </div>
+              <div style=""></div>
+              <div class="form-group">
+                <label>New Username *</label>
+                <input type="text" name="newUsername" required minlength="4">
+              </div>
+            </div>
+            <button type="submit" class="btn-save">Update Username</button>
+          </form>
+        </div>
+        <div class="settings-section">
+          <h3>Data Management</h3>
+          <p style="font-size:14px;color:var(--bark);margin-bottom:20px">Export or reset site content data.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-save" id="export-data-btn">Export Data (JSON)</button>
+            <button class="btn-delete" id="reset-data-btn">Reset to Defaults</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end content-area -->
+  </div><!-- end main-content -->
+</div><!-- end app -->
+
+<!-- ── Confirm Dialog ── -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <h4 id="confirm-title">Delete Item?</h4>
+    <p id="confirm-message">This action cannot be undone.</p>
+    <div class="confirm-actions">
+      <button class="btn-confirm-delete" id="confirm-yes">Delete</button>
+      <button class="btn-confirm-cancel" id="confirm-no">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Admin Toast ── -->
+<div class="admin-toast" id="admin-toast"></div>
+
+<script>
+'use strict';
+
+/* ── Default credentials (hashed-like with atob for obfuscation) ── */
+const DEFAULT_CREDS = {
+  user: btoa('namuadmin'),
+  pass: btoa('NamuSpaces2024!')
+};
+
+/* ── Default Data (same as main.js) ── */
+const DEFAULT_DATA = {
+  site: {
+    name: 'Namu Spaces',
+    tagline: 'Functional. Calm. Intentional Spaces.',
+    email: 'wabombamedina60@gmail.com',
+    phone: '+254 796 975 533',
+    whatsapp: '254796975533',
+    address: 'Design Studio, Nairobi',
+    instagram: 'https://www.instagram.com/namu_spaces?igsh=YzljYTk1ODg3Zg==',
+    tiktok: 'https://vm.tiktok.com/ZMHKoCaAnbgMd-tQvB0/',
+    facebook: '#',
+    pinterest: '#',
+    heroHeadline: 'Where Spaces Become Sanctuaries',
+    heroSubtitle: 'We design interiors that balance beauty and practicality — spaces that feel calm, intentional, and truly lived in.',
+    yearsExperience: '5+',
+    projectsCompleted: '80+',
+    happyClients: '60+',
+    citiesServed: '3',
+  },
+  services: [
+    { id: 1, icon: 'compass', name: 'Interior Design Consultation', desc: 'A comprehensive one-on-one session to understand your style, needs, and vision for your space.', features: ['Initial space assessment', 'Style preference discovery', 'Budget planning guidance', 'Design direction roadmap'], price: 'From KES 8,000' },
+    { id: 2, icon: 'grid', name: 'Space Planning & Layout', desc: 'Detailed floor plans and furniture arrangements that maximize functionality and flow.', features: ['Measured floor plans', 'Furniture layout options', 'Traffic flow analysis', 'Functional zoning'], price: 'From KES 15,000' },
+    { id: 3, icon: 'image', name: 'Mood Boards & Concepts', desc: 'Curated visual concept boards that translate your vision into a cohesive design direction.', features: ['Material & texture selection', 'Color palette development', 'Furniture sourcing guide', 'Brand mood alignment'], price: 'From KES 10,000' },
+    { id: 4, icon: 'box', name: '3D Render Designs', desc: 'Photorealistic 3D visualisations that show how your finished space will look.', features: ['Multiple viewing angles', 'Realistic lighting & textures', 'Material variations', 'Revision rounds included'], price: 'From KES 25,000' },
+    { id: 5, icon: 'star', name: 'Interior Styling', desc: 'Final touch styling — art, accessories, plants, and décor placement.', features: ['Décor sourcing & selection', 'Art & accessory curation', 'Plant styling', 'Photography-ready staging'], price: 'From KES 20,000' },
+  ],
+  projects: [
+    { id: 1, title: 'Kilimani Apartment', category: 'residential', desc: 'A serene one-bedroom reimagined with warm neutrals and intentional storage.', image: '', featured: true },
+    { id: 2, title: 'Westlands Office', category: 'office', desc: 'A creative agency workspace balancing collaboration zones and quiet corners.', image: '', featured: true },
+    { id: 3, title: 'Karen Villa', category: 'residential', desc: 'Earthy tones and natural textures for a family home that breathes.', image: '', featured: false },
+    { id: 4, title: 'CBD Showroom', category: 'commercial', desc: 'A retail space designed to showcase products with editorial clarity.', image: '', featured: false },
+  ],
+  testimonials: [
+    { id: 1, text: 'Namu Spaces completely transformed our apartment. The calm we feel when we walk in now is indescribable.', author: 'Amina K.', location: 'Kilimani, Nairobi', initials: 'AK' },
+    { id: 2, text: 'Our office had zero personality before. Now our team actually enjoys coming to work. Functional, beautiful and very us.', author: 'Brian M.', location: 'Westlands, Nairobi', initials: 'BM' },
+    { id: 3, text: 'Professional, creative, and deeply collaborative. She truly listened and delivered beyond expectations.', author: 'Grace W.', location: 'Karen, Nairobi', initials: 'GW' },
+  ],
+  blogPosts: [
+    { id: 1, title: '5 Ways to Make a Small Nairobi Apartment Feel Larger', category: 'Tips & Tricks', date: 'March 5, 2025', excerpt: 'Living in a compact apartment doesn\'t mean compromising on style. These five design principles will open up your space.', image: '', featured: true },
+    { id: 2, title: 'The Rise of Biophilic Design in Kenyan Homes', category: 'Trends', date: 'February 18, 2025', excerpt: 'Incorporating natural elements into interiors isn\'t just a trend — it\'s a lifestyle shift Nairobi\'s design scene is fully embracing.', image: '', featured: false },
+  ],
+  team: [
+    { id: 1, name: 'Medina Wabomba', role: 'Founder & Lead Designer', bio: 'Medina brings a deep sensitivity to space and function, crafting interiors that feel personal, purposeful and profoundly calm.', image: '', initials: 'MW' },
+  ],
+};
+
+/* ── State ── */
+let DATA = {};
+let CREDS = { ...DEFAULT_CREDS };
+let editingId = null;
+let pendingDeleteFn = null;
+let pendingImageData = { project: '', blog: '', team: '' };
+
+/* ── Storage ── */
+function loadData() {
+  try {
+    const s = localStorage.getItem('namuSpacesData');
+    DATA = s ? { ...DEFAULT_DATA, ...JSON.parse(s) } : JSON.parse(JSON.stringify(DEFAULT_DATA));
+  } catch(e) { DATA = JSON.parse(JSON.stringify(DEFAULT_DATA)); }
+  const cr = localStorage.getItem('namuAdminCreds');
+  if (cr) { try { CREDS = JSON.parse(cr); } catch(e) {} }
+}
+
+function saveData() {
+  localStorage.setItem('namuSpacesData', JSON.stringify(DATA));
+}
+
+function saveCreds() {
+  localStorage.setItem('namuAdminCreds', JSON.stringify(CREDS));
+}
+
+/* ── Toast ── */
+function toast(msg, type = 'success') {
+  const el = document.getElementById('admin-toast');
+  el.textContent = (type === 'success' ? '✓ ' : '✕ ') + msg;
+  el.className = 'admin-toast' + (type === 'error' ? ' error' : '');
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+/* ── Confirm Dialog ── */
+function confirmDelete(title, message, onConfirm) {
+  document.getElementById('confirm-title').textContent = title;
+  document.getElementById('confirm-message').textContent = message;
+  pendingDeleteFn = onConfirm;
+  document.getElementById('confirm-overlay').classList.add('open');
+}
+
+document.getElementById('confirm-yes').addEventListener('click', () => {
+  if (pendingDeleteFn) { pendingDeleteFn(); pendingDeleteFn = null; }
+  document.getElementById('confirm-overlay').classList.remove('open');
+});
+document.getElementById('confirm-no').addEventListener('click', () => {
+  pendingDeleteFn = null;
+  document.getElementById('confirm-overlay').classList.remove('open');
+});
+
+/* ── Auth ── */
+function checkSession() {
+  return sessionStorage.getItem('namuAdminSession') === 'true';
+}
+
+document.getElementById('login-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-error');
+
+  if (btoa(user) === CREDS.user && btoa(pass) === CREDS.pass) {
+    sessionStorage.setItem('namuAdminSession', 'true');
+    sessionStorage.setItem('namuAdminUser', user);
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    document.getElementById('sidebar-user').textContent = 'Signed in as ' + user;
+    initApp();
+  } else {
+    errEl.classList.add('show');
+    setTimeout(() => errEl.classList.remove('show'), 3000);
+  }
+});
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  sessionStorage.removeItem('namuAdminSession');
+  sessionStorage.removeItem('namuAdminUser');
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('login-form').reset();
+});
+
+/* ── Navigation ── */
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.querySelector(`[data-panel="${name}"]`).classList.add('active');
+  document.getElementById('topbar-title').textContent = {
+    dashboard: 'Dashboard', projects: 'Portfolio Projects', services: 'Services',
+    blog: 'Blog Posts', testimonials: 'Testimonials', team: 'Team Members',
+    settings: 'Site Settings', security: 'Security'
+  }[name] || name;
+  renderPanel(name);
+}
+
+document.querySelectorAll('[data-panel]').forEach(el => {
+  el.addEventListener('click', () => showPanel(el.dataset.panel));
+});
+
+/* ── Panel Renderers ── */
+function renderPanel(name) {
+  switch(name) {
+    case 'dashboard':   renderDashboard(); break;
+    case 'projects':    renderProjects(); break;
+    case 'services':    renderServices(); break;
+    case 'blog':        renderBlog(); break;
+    case 'testimonials':renderTestimonials(); break;
+    case 'team':        renderTeam(); break;
+    case 'settings':    renderSettings(); break;
+  }
+}
+
+/* ── Dashboard ── */
+function renderDashboard() {
+  const dash = document.getElementById('dash-stats');
+  const stats = [
+    { label: 'Total Projects', value: DATA.projects.length },
+    { label: 'Blog Posts', value: DATA.blogPosts.length },
+    { label: 'Testimonials', value: DATA.testimonials.length },
+    { label: 'Services', value: DATA.services.length },
+  ];
+  dash.innerHTML = stats.map(s => `
+    <div class="dash-card">
+      <div class="dash-card-label">${s.label}</div>
+      <div class="dash-card-value">${s.value}</div>
+    </div>
+  `).join('');
+}
+
+/* ── Image Upload Helper ── */
+function setupImageUpload(inputId, previewId, key) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { toast('Image must be under 5MB', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      pendingImageData[key] = ev.target.result;
+      const preview = document.getElementById(previewId);
+      if (preview) preview.innerHTML = `<img src="${ev.target.result}" alt="Preview">`;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ── Projects ── */
+function renderProjects() {
+  const list = document.getElementById('projects-list');
+  if (!DATA.projects.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">🏠</div><h3 class="empty-title">No projects yet</h3><p class="empty-desc">Add your first portfolio project</p></div>`;
+    return;
+  }
+  list.innerHTML = `
+    <table class="data-table">
+      <thead><tr><th>Title</th><th>Category</th><th>Featured</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${DATA.projects.map(p => `
+          <tr>
+            <td><strong>${p.title}</strong></td>
+            <td><span class="badge badge-${p.category}">${p.category}</span></td>
+            <td>${p.featured ? '✓ Yes' : '—'}</td>
+            <td><div class="td-actions">
+              <button class="btn-edit" onclick="editProject(${p.id})">Edit</button>
+              <button class="btn-delete" onclick="deleteProject(${p.id})">Delete</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+window.editProject = function(id) {
+  editingId = id;
+  const p = DATA.projects.find(x => x.id === id);
+  if (!p) return;
+  const f = document.getElementById('project-form');
+  f.querySelector('[name=title]').value = p.title;
+  f.querySelector('[name=category]').value = p.category;
+  f.querySelector('[name=desc]').value = p.desc;
+  f.querySelector('[name=featured]').value = String(p.featured);
+  setToggle('project-featured-toggle', 'project-featured-label', p.featured, 'project-form', 'featured');
+  pendingImageData.project = p.image || '';
+  if (p.image) document.getElementById('project-img-preview').innerHTML = `<img src="${p.image}" alt="Preview">`;
+  document.getElementById('project-form-title').textContent = 'Edit Project';
+  document.getElementById('project-form-wrap').style.display = 'block';
+  document.getElementById('project-form-wrap').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteProject = function(id) {
+  const p = DATA.projects.find(x => x.id === id);
+  confirmDelete('Delete Project?', `"${p.title}" will be permanently deleted.`, () => {
+    DATA.projects = DATA.projects.filter(x => x.id !== id);
+    saveData(); renderProjects(); toast('Project deleted');
+  });
+};
+
+document.getElementById('btn-add-project').addEventListener('click', () => {
+  editingId = null;
+  document.getElementById('project-form').reset();
+  document.getElementById('project-img-preview').innerHTML = '';
+  pendingImageData.project = '';
+  setToggle('project-featured-toggle', 'project-featured-label', false, 'project-form', 'featured');
+  document.getElementById('project-form-title').textContent = 'Add New Project';
+  document.getElementById('project-form-wrap').style.display = 'block';
+  document.getElementById('project-form-wrap').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('cancel-project').addEventListener('click', () => {
+  document.getElementById('project-form-wrap').style.display = 'none';
+  editingId = null;
+});
+
+document.getElementById('project-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const featured = f.querySelector('[name=featured]').value === 'true';
+  if (editingId) {
+    const idx = DATA.projects.findIndex(x => x.id === editingId);
+    DATA.projects[idx] = { ...DATA.projects[idx], title: f.querySelector('[name=title]').value, category: f.querySelector('[name=category]').value, desc: f.querySelector('[name=desc]').value, featured, image: pendingImageData.project || DATA.projects[idx].image };
+  } else {
+    const newId = Date.now();
+    DATA.projects.push({ id: newId, title: f.querySelector('[name=title]').value, category: f.querySelector('[name=category]').value, desc: f.querySelector('[name=desc]').value, featured, image: pendingImageData.project });
+  }
+  saveData(); renderProjects();
+  document.getElementById('project-form-wrap').style.display = 'none';
+  toast(editingId ? 'Project updated!' : 'Project added!');
+  editingId = null;
+});
+
+/* ── Toggle helper ── */
+function setToggle(toggleId, labelId, value, formId, fieldName) {
+  const toggle = document.getElementById(toggleId);
+  const label  = document.getElementById(labelId);
+  const form   = document.getElementById(formId);
+  if (!toggle) return;
+
+  const update = (val) => {
+    toggle.classList.toggle('on', val);
+    if (label) label.textContent = val ? 'Yes' : 'No';
+    if (form) {
+      const inp = form.querySelector(`[name="${fieldName}"]`);
+      if (inp) inp.value = String(val);
+    }
+  };
+  update(value);
+  toggle._handler && toggle.removeEventListener('click', toggle._handler);
+  toggle._handler = () => update(!toggle.classList.contains('on'));
+  toggle.addEventListener('click', toggle._handler);
+}
+
+/* ── Services ── */
+function renderServices() {
+  const list = document.getElementById('services-list');
+  if (!DATA.services.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">⚙</div><h3 class="empty-title">No services</h3></div>`;
+    return;
+  }
+  list.innerHTML = `
+    <table class="data-table">
+      <thead><tr><th>Service Name</th><th>Price</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${DATA.services.map(s => `
+          <tr>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.price}</td>
+            <td><div class="td-actions">
+              <button class="btn-edit" onclick="editService(${s.id})">Edit</button>
+              <button class="btn-delete" onclick="deleteService(${s.id})">Delete</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+window.editService = function(id) {
+  editingId = id;
+  const s = DATA.services.find(x => x.id === id);
+  if (!s) return;
+  const f = document.getElementById('service-form');
+  f.querySelector('[name=name]').value = s.name;
+  f.querySelector('[name=price]').value = s.price;
+  f.querySelector('[name=desc]').value = s.desc;
+  f.querySelector('[name=features]').value = s.features.join('\n');
+  document.getElementById('service-form-title').textContent = 'Edit Service';
+  document.getElementById('service-form-wrap').style.display = 'block';
+  document.getElementById('service-form-wrap').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteService = function(id) {
+  const s = DATA.services.find(x => x.id === id);
+  confirmDelete('Delete Service?', `"${s.name}" will be permanently deleted.`, () => {
+    DATA.services = DATA.services.filter(x => x.id !== id);
+    saveData(); renderServices(); toast('Service deleted');
+  });
+};
+
+document.getElementById('btn-add-service').addEventListener('click', () => {
+  editingId = null;
+  document.getElementById('service-form').reset();
+  document.getElementById('service-form-title').textContent = 'Add New Service';
+  document.getElementById('service-form-wrap').style.display = 'block';
+  document.getElementById('service-form-wrap').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('cancel-service').addEventListener('click', () => {
+  document.getElementById('service-form-wrap').style.display = 'none';
+  editingId = null;
+});
+
+document.getElementById('service-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const features = f.querySelector('[name=features]').value.split('\n').map(x => x.trim()).filter(Boolean);
+  if (editingId) {
+    const idx = DATA.services.findIndex(x => x.id === editingId);
+    DATA.services[idx] = { ...DATA.services[idx], name: f.querySelector('[name=name]').value, price: f.querySelector('[name=price]').value, desc: f.querySelector('[name=desc]').value, features };
+  } else {
+    DATA.services.push({ id: Date.now(), icon: 'star', name: f.querySelector('[name=name]').value, price: f.querySelector('[name=price]').value, desc: f.querySelector('[name=desc]').value, features });
+  }
+  saveData(); renderServices();
+  document.getElementById('service-form-wrap').style.display = 'none';
+  toast(editingId ? 'Service updated!' : 'Service added!');
+  editingId = null;
+});
+
+/* ── Blog ── */
+function renderBlog() {
+  const list = document.getElementById('blog-list');
+  if (!DATA.blogPosts.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">📝</div><h3 class="empty-title">No posts yet</h3><p class="empty-desc">Write your first blog post</p></div>`;
+    return;
+  }
+  list.innerHTML = `
+    <table class="data-table">
+      <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${DATA.blogPosts.map(p => `
+          <tr>
+            <td><strong>${p.title}</strong></td>
+            <td>${p.category}</td>
+            <td>${p.date}</td>
+            <td><div class="td-actions">
+              <button class="btn-edit" onclick="editBlog(${p.id})">Edit</button>
+              <button class="btn-delete" onclick="deleteBlog(${p.id})">Delete</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+window.editBlog = function(id) {
+  editingId = id;
+  const p = DATA.blogPosts.find(x => x.id === id);
+  if (!p) return;
+  const f = document.getElementById('blog-form');
+  f.querySelector('[name=title]').value = p.title;
+  f.querySelector('[name=category]').value = p.category;
+  f.querySelector('[name=date]').value = p.date;
+  f.querySelector('[name=excerpt]').value = p.excerpt;
+  pendingImageData.blog = p.image || '';
+  if (p.image) document.getElementById('blog-img-preview').innerHTML = `<img src="${p.image}" alt="Preview">`;
+  document.getElementById('blog-form-title').textContent = 'Edit Blog Post';
+  document.getElementById('blog-form-wrap').style.display = 'block';
+  document.getElementById('blog-form-wrap').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteBlog = function(id) {
+  const p = DATA.blogPosts.find(x => x.id === id);
+  confirmDelete('Delete Post?', `"${p.title}" will be permanently deleted.`, () => {
+    DATA.blogPosts = DATA.blogPosts.filter(x => x.id !== id);
+    saveData(); renderBlog(); toast('Post deleted');
+  });
+};
+
+document.getElementById('btn-add-blog').addEventListener('click', () => {
+  editingId = null;
+  document.getElementById('blog-form').reset();
+  document.getElementById('blog-img-preview').innerHTML = '';
+  pendingImageData.blog = '';
+  document.getElementById('blog-form-title').textContent = 'New Blog Post';
+  document.getElementById('blog-form-wrap').style.display = 'block';
+  document.getElementById('blog-form-wrap').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('cancel-blog').addEventListener('click', () => {
+  document.getElementById('blog-form-wrap').style.display = 'none';
+  editingId = null;
+});
+
+document.getElementById('blog-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const postData = {
+    title: f.querySelector('[name=title]').value,
+    category: f.querySelector('[name=category]').value,
+    date: f.querySelector('[name=date]').value || today,
+    excerpt: f.querySelector('[name=excerpt]').value,
+    image: pendingImageData.blog,
+    featured: false,
+  };
+  if (editingId) {
+    const idx = DATA.blogPosts.findIndex(x => x.id === editingId);
+    DATA.blogPosts[idx] = { ...DATA.blogPosts[idx], ...postData };
+  } else {
+    DATA.blogPosts.push({ id: Date.now(), ...postData });
+  }
+  saveData(); renderBlog();
+  document.getElementById('blog-form-wrap').style.display = 'none';
+  toast(editingId ? 'Post updated!' : 'Post published!');
+  editingId = null;
+});
+
+/* ── Testimonials ── */
+function renderTestimonials() {
+  const list = document.getElementById('testimonials-list');
+  if (!DATA.testimonials.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">💬</div><h3 class="empty-title">No testimonials yet</h3></div>`;
+    return;
+  }
+  list.innerHTML = `
+    <table class="data-table">
+      <thead><tr><th>Client</th><th>Location</th><th>Excerpt</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${DATA.testimonials.map(t => `
+          <tr>
+            <td><strong>${t.author}</strong></td>
+            <td>${t.location || '—'}</td>
+            <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.text}</td>
+            <td><div class="td-actions">
+              <button class="btn-edit" onclick="editTestimonial(${t.id})">Edit</button>
+              <button class="btn-delete" onclick="deleteTestimonial(${t.id})">Delete</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+window.editTestimonial = function(id) {
+  editingId = id;
+  const t = DATA.testimonials.find(x => x.id === id);
+  if (!t) return;
+  const f = document.getElementById('testimonial-form');
+  f.querySelector('[name=author]').value = t.author;
+  f.querySelector('[name=location]').value = t.location;
+  f.querySelector('[name=initials]').value = t.initials;
+  f.querySelector('[name=text]').value = t.text;
+  document.getElementById('testimonial-form-title').textContent = 'Edit Testimonial';
+  document.getElementById('testimonial-form-wrap').style.display = 'block';
+  document.getElementById('testimonial-form-wrap').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteTestimonial = function(id) {
+  const t = DATA.testimonials.find(x => x.id === id);
+  confirmDelete('Delete Testimonial?', `Review from "${t.author}" will be deleted.`, () => {
+    DATA.testimonials = DATA.testimonials.filter(x => x.id !== id);
+    saveData(); renderTestimonials(); toast('Testimonial deleted');
+  });
+};
+
+document.getElementById('btn-add-testimonial').addEventListener('click', () => {
+  editingId = null;
+  document.getElementById('testimonial-form').reset();
+  document.getElementById('testimonial-form-title').textContent = 'Add Testimonial';
+  document.getElementById('testimonial-form-wrap').style.display = 'block';
+  document.getElementById('testimonial-form-wrap').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('cancel-testimonial').addEventListener('click', () => {
+  document.getElementById('testimonial-form-wrap').style.display = 'none';
+  editingId = null;
+});
+
+document.getElementById('testimonial-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const td = { author: f.querySelector('[name=author]').value, location: f.querySelector('[name=location]').value, initials: f.querySelector('[name=initials]').value || f.querySelector('[name=author]').value.slice(0,2).toUpperCase(), text: f.querySelector('[name=text]').value };
+  if (editingId) {
+    const idx = DATA.testimonials.findIndex(x => x.id === editingId);
+    DATA.testimonials[idx] = { ...DATA.testimonials[idx], ...td };
+  } else {
+    DATA.testimonials.push({ id: Date.now(), ...td });
+  }
+  saveData(); renderTestimonials();
+  document.getElementById('testimonial-form-wrap').style.display = 'none';
+  toast(editingId ? 'Testimonial updated!' : 'Testimonial added!');
+  editingId = null;
+});
+
+/* ── Team ── */
+function renderTeam() {
+  const list = document.getElementById('team-list');
+  if (!DATA.team.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><h3 class="empty-title">No team members</h3></div>`;
+    return;
+  }
+  list.innerHTML = `
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Role</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${DATA.team.map(m => `
+          <tr>
+            <td><strong>${m.name}</strong></td>
+            <td>${m.role}</td>
+            <td><div class="td-actions">
+              <button class="btn-edit" onclick="editTeam(${m.id})">Edit</button>
+              <button class="btn-delete" onclick="deleteTeam(${m.id})">Delete</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+window.editTeam = function(id) {
+  editingId = id;
+  const m = DATA.team.find(x => x.id === id);
+  if (!m) return;
+  const f = document.getElementById('team-form');
+  f.querySelector('[name=name]').value = m.name;
+  f.querySelector('[name=role]').value = m.role;
+  f.querySelector('[name=initials]').value = m.initials;
+  f.querySelector('[name=bio]').value = m.bio;
+  pendingImageData.team = m.image || '';
+  if (m.image) document.getElementById('team-img-preview').innerHTML = `<img src="${m.image}" alt="Preview">`;
+  document.getElementById('team-form-title').textContent = 'Edit Team Member';
+  document.getElementById('team-form-wrap').style.display = 'block';
+  document.getElementById('team-form-wrap').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteTeam = function(id) {
+  const m = DATA.team.find(x => x.id === id);
+  confirmDelete('Remove Team Member?', `"${m.name}" will be removed from the team page.`, () => {
+    DATA.team = DATA.team.filter(x => x.id !== id);
+    saveData(); renderTeam(); toast('Team member removed');
+  });
+};
+
+document.getElementById('btn-add-team').addEventListener('click', () => {
+  editingId = null;
+  document.getElementById('team-form').reset();
+  document.getElementById('team-img-preview').innerHTML = '';
+  pendingImageData.team = '';
+  document.getElementById('team-form-title').textContent = 'Add Team Member';
+  document.getElementById('team-form-wrap').style.display = 'block';
+  document.getElementById('team-form-wrap').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('cancel-team').addEventListener('click', () => {
+  document.getElementById('team-form-wrap').style.display = 'none';
+  editingId = null;
+});
+
+document.getElementById('team-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const name = f.querySelector('[name=name]').value;
+  const md = { name, role: f.querySelector('[name=role]').value, initials: f.querySelector('[name=initials]').value || name.split(' ').map(x=>x[0]).join('').toUpperCase(), bio: f.querySelector('[name=bio]').value, image: pendingImageData.team };
+  if (editingId) {
+    const idx = DATA.team.findIndex(x => x.id === editingId);
+    DATA.team[idx] = { ...DATA.team[idx], ...md };
+  } else {
+    DATA.team.push({ id: Date.now(), ...md });
+  }
+  saveData(); renderTeam();
+  document.getElementById('team-form-wrap').style.display = 'none';
+  toast(editingId ? 'Team member updated!' : 'Team member added!');
+  editingId = null;
+});
+
+/* ── Settings ── */
+function renderSettings() {
+  const f = document.getElementById('settings-form');
+  const d = DATA.site;
+  Object.keys(d).forEach(key => {
+    const el = f.querySelector(`[name="${key}"]`);
+    if (el) el.value = d[key] || '';
+  });
+}
+
+document.getElementById('settings-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const formData = new FormData(f);
+  formData.forEach((val, key) => { if (key in DATA.site) DATA.site[key] = val; });
+  saveData(); toast('Settings saved successfully!');
+});
+
+/* ── Security ── */
+document.getElementById('password-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const curr = f.querySelector('[name=currentPass]').value;
+  const newP = f.querySelector('[name=newPass]').value;
+  const conf = f.querySelector('[name=confirmPass]').value;
+  if (btoa(curr) !== CREDS.pass) { toast('Current password is incorrect', 'error'); return; }
+  if (newP !== conf) { toast('New passwords do not match', 'error'); return; }
+  if (newP.length < 8) { toast('Password must be at least 8 characters', 'error'); return; }
+  CREDS.pass = btoa(newP);
+  saveCreds(); f.reset(); toast('Password updated successfully!');
+});
+
+document.getElementById('username-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const pass = f.querySelector('[name=passForUser]').value;
+  const newU = f.querySelector('[name=newUsername]').value;
+  if (btoa(pass) !== CREDS.pass) { toast('Incorrect password', 'error'); return; }
+  CREDS.user = btoa(newU);
+  saveCreds(); f.reset();
+  document.getElementById('sidebar-user').textContent = 'Signed in as ' + newU;
+  toast('Username updated successfully!');
+});
+
+document.getElementById('export-data-btn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'namu-spaces-data.json';
+  a.click();
+  toast('Data exported!');
+});
+
+document.getElementById('reset-data-btn').addEventListener('click', () => {
+  confirmDelete('Reset All Data?', 'This will restore all content to defaults. This cannot be undone.', () => {
+    DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    saveData(); renderPanel('settings'); toast('Data reset to defaults');
+  });
+});
+
+/* ── Init ── */
+function initApp() {
+  setupImageUpload('project-img-input', 'project-img-preview', 'project');
+  setupImageUpload('blog-img-input', 'blog-img-preview', 'blog');
+  setupImageUpload('team-img-input', 'team-img-preview', 'team');
+  setToggle('project-featured-toggle', 'project-featured-label', false, 'project-form', 'featured');
+  renderDashboard();
+}
+
+/* ── Boot ── */
+loadData();
+if (checkSession()) {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  const user = sessionStorage.getItem('namuAdminUser') || 'Admin';
+  document.getElementById('sidebar-user').textContent = 'Signed in as ' + user;
+  initApp();
+}
+</script>
+</body>
+</html>
