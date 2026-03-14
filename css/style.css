@@ -211,7 +211,7 @@ section { padding: var(--section-pad) 0; }
 .mobile-menu.open { display: flex; opacity: 1; pointer-events: all; }
 .mobile-menu a {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: 25px;
   color: var(--charcoal);
   transition: color 0.2s;
 }
