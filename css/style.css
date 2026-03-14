@@ -196,7 +196,7 @@ section { padding: var(--section-pad) 0; }
 /* Mobile Menu */
 .mobile-menu {
   display: none;
-  position: fixed;
+  position: relative;
   top: var(--nav-h); left: 0; right: 0; bottom: 0;
   background: var(--warm-white);
   z-index: 999;
