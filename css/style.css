@@ -124,7 +124,7 @@ section { padding: var(--section-pad) 0; }
 
 .logo-mark {
   font-family: var(--ui-monospace);
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   color: var(--ink);
   letter-spacing: normal;
