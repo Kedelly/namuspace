@@ -1429,13 +1429,14 @@ footer {
   font-family: var(--font-display);
   font-size: 24px;
   margin-bottom: 6px;
+  color: black;
 }
 
 .team-role {
   font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: #3d281c;
   margin-bottom: 16px;
 }
 
