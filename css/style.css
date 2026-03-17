@@ -17,25 +17,11 @@
   --forest:    #3D5247;
   --charcoal:  #2A2A2A;
   --ink:       #1A1A1A;
-  --mist:      #A8B4A0;
-  --warm-beige:#f2e6d9;
-   --beige-light:#faf3eb;
-  --beige-dark:#d9c9b8;
-  --wood:#a67b5b;
-  --brass:#d4af37;
-  --stone:#c4bcb0;
-  --text-primary:#4a3f37;
-  --text-secondary:#7a6a5c;
-  --background:#faf3eb;
-  --accent-fabric:#d6c4b0;
-
-
+  --mist: #c3e7aa;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'DM Sans', sans-serif;
-
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1);
-
   --nav-h: 80px;
   --radius: 2px;
   --section-pad: clamp(80px, 10vw, 140px);
@@ -52,8 +38,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--warm-beige);
-  color: var(--text-primary);
+  background-color: #ddaf64;
+  color: rgb(235 195 115 / 95%);
   line-height: 1.7;
   overflow-x: hidden;
 }
@@ -94,19 +80,128 @@ h1, h2, h3, h4 {
 
 section { padding: var(--section-pad) 0; }
 
-/* ── Navigation ────────────────────────────────────────────── */
+/* ── Logo Image ────────────────────────────────────────────── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-logo-img {
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 1.5px solid rgba(196,168,130,0.35);
+  transition: border-color 0.3s, transform 0.3s;
+  flex-shrink: 0;
+}
+
+#navbar.scrolled .nav-logo-img {
+  border-color: rgb(215 172 112 / 55%);
+}
+
+.nav-logo-img:hover {
+  border-color: var(--terracotta);
+  transform: scale(1.06);
+}
+
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nav-logo-name {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: bolder;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* White name when nav is over dark hero */
+#navbar:not(.scrolled) .nav-logo-name {
+  color: var(--cream);
+}
+
+.nav-logo-tagline {
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0e0e0d;
+  font-weight: bolder;
+  line-height: 1;
+}
+
+/* Mobile menu logo */
+.mobile-menu-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(196,168,130,0.4);
+  margin-bottom: 6px;
+}
+
+/* Footer logo */
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.footer-logo-img {
+  height: 52px;
+  width: 52px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 1.5px solid rgba(196,168,130,0.25);
+  transition: border-color 0.3s, transform 0.3s;
+  flex-shrink: 0;
+}
+
+.footer-logo-img:hover {
+  border-color: var(--clay);
+  transform: scale(1.04);
+}
+
+.footer-logo-text .logo-mark {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--cream);
+  display: block;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.footer-logo-text .logo-tagline {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 500;
+}
 #navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: var(--nav-h);
   z-index: 1000;
-  transition: background 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
 }
 
 #navbar.scrolled {
-  background: rgba(253, 250, 244, 0.95);
+  background: rgb(235 195 115 / 95%);
   backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 1px 0 rgb(231 216 107 / 8%);
 }
 
 .nav-inner {
@@ -118,16 +213,16 @@ section { padding: var(--section-pad) 0; }
 
 .nav-logo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 2px;
 }
 
 .logo-mark {
-  font-family: var(--ui-monospace);
-  font-size: 30px;
-  font-weight: bold;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
   color: var(--ink);
-  letter-spacing: normal;
+  letter-spacing: 0.04em;
 }
 
 .logo-tagline {
@@ -197,8 +292,11 @@ section { padding: var(--section-pad) 0; }
 .mobile-menu {
   display: none;
   position: relative;
-  top: var(--nav-h); left: 0; right: 0; bottom: 0;
-  background: var(--warm-white);
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #d5aa54;
   z-index: 999;
   flex-direction: column;
   align-items: center;
@@ -208,10 +306,10 @@ section { padding: var(--section-pad) 0; }
   pointer-events: none;
   transition: opacity 0.3s var(--ease-smooth);
 }
-.mobile-menu.open { display: flex; opacity: 1; pointer-events: all; }
+.mobile-menu.open {display: flex;opacity: 1;pointer-events: all;}
 .mobile-menu a {
   font-family: var(--font-display);
-  font-size: 25px;
+  font-size: 36px;
   color: var(--charcoal);
   transition: color 0.2s;
 }
@@ -537,7 +635,7 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* ── Portfolio ─────────────────────────────────────────────── */
-#portfolio { background: var(--clay); }
+#portfolio { background: var(--warm-white); }
 
 .portfolio-filters {
   display: flex;
@@ -641,7 +739,7 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* ── About Preview ─────────────────────────────────────────── */
-#about-preview { background: var(--clay); }
+#about-preview { background: var(--cream); }
 
 .about-image-stack {
   position: relative;
@@ -756,7 +854,7 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* ── Blog ──────────────────────────────────────────────────── */
-#blog { background: var(--clay); }
+#blog { background: var(--warm-white); }
 
 .blog-grid {
   display: grid;
@@ -869,7 +967,7 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* ── Contact ───────────────────────────────────────────────── */
-#contact-section { background: var(--clay); }
+#contact-section { background: var(--cream); }
 
 .contact-grid {
   display: grid;
@@ -1313,10 +1411,10 @@ footer {
   gap: 40px;
 }
 
-.team-card { text-align: left; }
+.team-card { text-align: center; }
 
 .team-photo {
-  width: 30%;
+  width: 100%;
   aspect-ratio: 3/4;
   background: var(--sand);
   margin-bottom: 24px;
