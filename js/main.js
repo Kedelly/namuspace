@@ -32,15 +32,15 @@ const DEFAULT_DATA = {
     { id: 1, icon: 'compass', name: 'Interior Design Consultation',
       desc: 'A comprehensive one-on-one session to understand your style, needs, and vision for your space.',
       features: ['Initial space assessment', 'Style preference discovery', 'Budget planning guidance', 'Design direction roadmap'],
-      price: 'From KES 3,000' },
+      price: 'From KES 8,000' },
     { id: 2, icon: 'grid', name: 'Space Planning & Layout',
       desc: 'Detailed floor plans and furniture arrangements that maximise functionality and flow in your space.',
       features: ['Measured floor plans', 'Furniture layout options', 'Traffic flow analysis', 'Functional zoning'],
-      price: 'From KES 6,000' },
+      price: 'From KES 15,000' },
     { id: 3, icon: 'image', name: 'Mood Boards & Concepts',
       desc: 'Curated visual concept boards that translate your vision into a cohesive design direction.',
       features: ['Material & texture selection', 'Colour palette development', 'Furniture sourcing guide', 'Brand mood alignment'],
-      price: 'From KES 6,000' },
+      price: 'From KES 10,000' },
     { id: 4, icon: 'box', name: '3D Render Designs',
       desc: 'Photorealistic 3D visualisations that show exactly how your finished space will look before work begins.',
       features: ['Multiple viewing angles', 'Realistic lighting & textures', 'Material variations', 'Revision rounds included'],
@@ -78,9 +78,14 @@ const DEFAULT_DATA = {
 };
 
 /* ════════════════════════════════════════════════════════════
-   DATA
+   DATA — dual-path loader
+   Fast path : localStorage cache  (synchronous, instant render)
+   Live path : NamuDB IndexedDB    (async, resolves real images)
+   Pages render immediately from cache, then DB overlay patches
+   in any differences (especially uploaded images).
 ═══════════════════════════════════════════════════════════ */
 function getData() {
+  /* Synchronous fast-path from localStorage cache */
   try {
     const stored = localStorage.getItem('namuSpacesData');
     if (stored) {
@@ -96,6 +101,44 @@ function getData() {
     }
   } catch (e) { /* fall through */ }
   return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+
+/**
+ * getDataLive() — async, pulls from IndexedDB via NamuDB.
+ * Called after initial render to patch in uploaded images & latest edits.
+ */
+async function getDataLive() {
+  if (window.NamuDB) {
+    try {
+      await NamuDB.ready();
+      return await NamuDB.loadSiteData();
+    } catch (e) { /* fall back to cache */ }
+  }
+  return getData();
+}
+
+/** Re-render the current page with live DB data (patches images etc.) */
+async function patchWithLiveData() {
+  const data = await getDataLive();
+  const page = document.body.dataset.page;
+  const renderMap = {
+    home:      () => renderHome(data),
+    about:     () => renderAbout(data),
+    services:  () => renderServices(data),
+    portfolio: () => renderPortfolio(data),
+    blog:      () => renderBlog(data),
+    contact:   () => renderContact(data),
+  };
+  if (renderMap[page]) {
+    renderMap[page]();
+    initReveal();
+    initCounters();
+    initImageFades();
+  }
+  renderNav(data);
+  renderFooter(data);
+  renderWhatsApp(data);
+  renderInquiryModal(data);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -130,12 +173,12 @@ var IMAGES = {
   about2:  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=600&fit=crop&auto=format&q=80',
 
   /* Team photo */
-  team1:   'https://69a5fa9b581800b707fb4b6e.imgix.net/newimage/Alhamdulillahi%20Nimeiva%E2%9D%A4%EF%B8%8F%F0%9F%A5%B5%F0%9F%A4%97%F0%9F%8C%B8_MUA%20_tiffanydontez(WEBP)_0.webp?w=1080&h=1080',
+  team1:   'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&auto=format&q=80',
 
   /* Portfolio projects — curated interior design photos */
   proj1:   'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=800&fit=crop&auto=format&q=80',
-  proj2:   'https://69a5fa9b581800b707fb4b6e.imgix.net/namuimages/WhatsApp%20Image%202026-03-03%20at%2001.23.08%20(1).jpeg?w=1080&h=1350',
-  proj3:   'https://69a5fa9b581800b707fb4b6e.imgix.net/A-beautiful-interior-design-image-of-a-living-room.-Warm-beige-creates-a-calm-inviting-atmosphere.-Pairs-beautifully-with-wood,-brass-and-textured-fabric-measuring-1400px-by-1000px-991295.png?w=1024&h=1024',
+  proj2:   'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop&auto=format&q=80',
+  proj3:   'https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=900&h=600&fit=crop&auto=format&q=80',
   proj4:   'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&h=600&fit=crop&auto=format&q=80',
   proj5:   'https://images.unsplash.com/photo-1583845112203-29329902332e?w=900&h=700&fit=crop&auto=format&q=80',
   proj6:   'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&h=600&fit=crop&auto=format&q=80',
@@ -316,19 +359,72 @@ document.addEventListener('click', function(e) {
 });
 
 /* ════════════════════════════════════════════════════════════
-   CONTACT / INQUIRY FORMS — delegated
+   SAVE INQUIRY — stores to IndexedDB (NamuDB) and falls back
+   to localStorage so the admin panel always receives it.
+═══════════════════════════════════════════════════════════ */
+function saveInquiryToStorage(formEl, source) {
+  /* Collect field values by their label text */
+  var fields = {};
+  formEl.querySelectorAll('.form-group').forEach(function(group) {
+    var lbl = group.querySelector('label');
+    var inp = group.querySelector('input, select, textarea');
+    if (lbl && inp && inp.value.trim()) {
+      var key = lbl.textContent.replace(/\*/g,'').trim().toLowerCase();
+      fields[key] = inp.value.trim();
+    }
+  });
+
+  var inquiry = {
+    id:         Date.now() + Math.floor(Math.random() * 9999),
+    name:       fields['your name']        || fields['full name']  || fields['name']    || 'Unknown',
+    email:      fields['email address']    || fields['email']      || '',
+    phone:      fields['phone / whatsapp'] || fields['phone number'] || fields['phone'] || '',
+    service:    fields['service interested in'] || fields['service'] || '',
+    message:    fields['your message']     || fields['tell us about your space'] || fields['message'] || '',
+    source:     source || 'Website Form',
+    status:     'new',
+    receivedAt: Date.now(),
+    readAt:     null,
+    completedAt:null,
+    notes:      '',
+  };
+
+  /* Primary: IndexedDB via NamuDB */
+  if (window.NamuDB) {
+    NamuDB.ready().then(function() {
+      NamuDB.saveInquiry(inquiry);
+    }).catch(function() {});
+  }
+
+  /* Fallback mirror: localStorage (also keeps admin panel polling working) */
+  try {
+    var existing = [];
+    try { existing = JSON.parse(localStorage.getItem('namuInquiries') || '[]'); } catch(x) {}
+    existing.push(inquiry);
+    localStorage.setItem('namuInquiries', JSON.stringify(existing));
+  } catch(e) {}
+}
+
+/* ════════════════════════════════════════════════════════════
+   CONTACT / INQUIRY FORMS — delegated submit handler
 ═══════════════════════════════════════════════════════════ */
 document.addEventListener('submit', async function(e) {
   if (!e.target.matches('.contact-form, .inquiry-form')) return;
   e.preventDefault();
-  const form = e.target;
-  const btn = form.querySelector('button[type="submit"]');
-  const orig = btn.innerHTML;
+  const form   = e.target;
+  const source = form.classList.contains('inquiry-form') ? 'Book Consultation Modal' : 'Contact Page Form';
+  const btn    = form.querySelector('button[type="submit"]');
+  const orig   = btn.innerHTML;
+
   btn.textContent = 'Sending\u2026';
-  btn.disabled = true;
+  btn.disabled    = true;
+
+  /* Save to localStorage for admin panel */
+  saveInquiryToStorage(form, source);
+
   await new Promise(r => setTimeout(r, 1200));
   btn.innerHTML = orig;
-  btn.disabled = false;
+  btn.disabled  = false;
   showToast('\u2713 Thank you! We\u2019ll be in touch within 24 hours.');
   form.reset();
   const overlay = form.closest('.modal-overlay');
@@ -355,8 +451,11 @@ function renderNav(data) {
     <div class="container">
       <div class="nav-inner">
         <a href="index.html" class="nav-logo">
-          <span class="logo-mark">${d.name}</span>
-          <span class="logo-tagline">Interior Design Studio</span>
+          <img src="images/namu-logo.jpg" alt="Namu Spaces Logo" class="nav-logo-img">
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">${d.name}</span>
+            <span class="nav-logo-tagline">Interior Design Studio</span>
+          </div>
         </a>
         <nav class="nav-links">
           ${pages.map(p => `<a href="${p.href}"${p.href === cur ? ' style="color:var(--terracotta)"' : ''}>${p.label}</a>`).join('')}
@@ -366,6 +465,7 @@ function renderNav(data) {
       </div>
     </div>
     <div class="mobile-menu">
+      <img src="images/namu-logo.jpg" alt="Namu Spaces" class="mobile-menu-logo">
       ${pages.map(p => `<a href="${p.href}">${p.label}</a>`).join('')}
       <button class="btn btn-primary" data-modal="inquiry-modal" style="margin-top:8px">Book Consultation</button>
     </div>`;
@@ -382,10 +482,13 @@ function renderFooter(data) {
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="margin-bottom:20px">
-            <span class="logo-mark">${d.name}</span>
-            <span class="logo-tagline">Interior Design Studio \u00b7 Nairobi</span>
-          </div>
+          <a href="index.html" class="footer-logo-wrap">
+            <img src="images/namu-logo.jpg" alt="Namu Spaces" class="footer-logo-img">
+            <div class="footer-logo-text">
+              <span class="logo-mark">${d.name}</span>
+              <span class="logo-tagline">Interior Design · Nairobi</span>
+            </div>
+          </a>
           <p>Thoughtful interiors for how you actually live. From consultation to final styling, we shape spaces that feel like home.</p>
           <div class="footer-social">
             <a href="${d.instagram}" target="_blank" rel="noopener" class="social-link" title="Instagram">${ICONS.instagram}</a>
@@ -972,15 +1075,13 @@ function initImageFades() {
    BOOT — DOMContentLoaded
 ═══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
+  /* 1. Instant render from localStorage cache */
   var data = getData();
-
-  /* Render shared chrome first */
   renderNav(data);
   renderFooter(data);
   renderWhatsApp(data);
   renderInquiryModal(data);
 
-  /* Render page-specific content */
   var page = document.body.dataset.page;
   if (page === 'home')      renderHome(data);
   if (page === 'about')     renderAbout(data);
@@ -989,13 +1090,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (page === 'blog')      renderBlog(data);
   if (page === 'contact')   renderContact(data);
 
-  /* Init behaviours AFTER DOM is fully built */
+  /* 2. Init all interactive behaviours */
   initLoader();
   initNav();
   initReveal();
   initCounters();
   initImageFades();
-  /* Note: modal, form, and filter handlers are delegated — already active */
+
+  /* 3. Async patch — loads live data from IndexedDB (resolves uploaded images etc.) */
+  if (window.NamuDB) {
+    NamuDB.ready().then(function() {
+      patchWithLiveData();
+    }).catch(function() { /* stay on cache data */ });
+  }
 });
 
 /* Expose globally */
