@@ -1414,12 +1414,13 @@ footer {
 .team-card { text-align: center; }
 
 .team-photo {
-  width: 100%;
-  aspect-ratio: 3/4;
+  width: 200px;
+  aspect-ratio: auto;
   background: var(--sand);
   margin-bottom: 24px;
   overflow: hidden;
-  position: relative;
+  position: static;
+  border-radius: 100% 
 }
 
 .team-photo img { transition: transform 0.5s var(--ease-smooth); }
