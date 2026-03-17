@@ -173,7 +173,7 @@ var IMAGES = {
   about2:  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=600&fit=crop&auto=format&q=80',
 
   /* Team photo */
-  team1:   'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&auto=format&q=80',
+  team1:   'https://69a5fa9b581800b707fb4b6e.imgix.net/newimage/Alhamdulillahi%20Nimeiva%E2%9D%A4%EF%B8%8F%F0%9F%A5%B5%F0%9F%A4%97%F0%9F%8C%B8_MUA%20_tiffanydontez(WEBP)_0.webp?w=1080&h=1080',
 
   /* Portfolio projects — curated interior design photos */
   proj1:   'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=800&fit=crop&auto=format&q=80',
