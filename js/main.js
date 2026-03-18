@@ -178,7 +178,7 @@ var IMAGES = {
   /* Portfolio projects — curated interior design photos */
   proj1:   'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=800&fit=crop&auto=format&q=80',
   proj2:   'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop&auto=format&q=80',
-  proj3:   'https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=900&h=600&fit=crop&auto=format&q=80',
+  proj3:   'https://69a5fa9b581800b707fb4b6e.imgix.net/A-beautiful-interior-design-image-of-a-living-room.-Warm-beige-creates-a-calm-inviting-atmosphere.-Pairs-beautifully-with-wood,-brass-and-textured-fabric-measuring-1400px-by-1000px-991295.png?w=1024&h=1024',
   proj4:   'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&h=600&fit=crop&auto=format&q=80',
   proj5:   'https://images.unsplash.com/photo-1583845112203-29329902332e?w=900&h=700&fit=crop&auto=format&q=80',
   proj6:   'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&h=600&fit=crop&auto=format&q=80',
