@@ -44,11 +44,11 @@ const DEFAULT_DATA = {
     { id: 4, icon: 'box', name: '3D Render Designs',
       desc: 'Photorealistic 3D visualisations that show exactly how your finished space will look before work begins.',
       features: ['Multiple viewing angles', 'Realistic lighting & textures', 'Material variations', 'Revision rounds included'],
-      price: 'From KES 25,000' },
+      price: 'From KES 20,000' },
     { id: 5, icon: 'star', name: 'Interior Styling',
       desc: 'Final touch styling that brings the design to life — art, accessories, plants, and decor placement.',
       features: ['Decor sourcing & selection', 'Art & accessory curation', 'Plant styling', 'Photography-ready staging'],
-      price: 'From KES 20,000' },
+      price: 'From KES 30,000' },
   ],
   projects: [
     { id: 1, title: 'Kilimani Apartment', category: 'residential', desc: 'A serene one-bedroom reimagined with warm neutrals and intentional storage.', image: '', featured: true },
