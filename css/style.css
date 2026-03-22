@@ -1411,7 +1411,7 @@ footer {
   gap: 40px;
 }
 
-.team-card { text-align: center; }
+.team-card { text-align: left; }
 
 .team-photo {
   width: 200px;
